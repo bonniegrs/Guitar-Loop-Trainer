@@ -216,7 +216,7 @@ export async function autoLoadFromFile(onComplete) {
         savePlaylist(data);
         renderPlaylist();
         if (onComplete) onComplete();
-        console.log('[Guitar Looper Trainer] Restored', data.length, 'videos from playlist.json');
+        console.log('[Guitar Loop Trainer] Restored', data.length, 'videos from playlist.json');
     } catch {
         // playlist.json not found or invalid — that is fine
     }

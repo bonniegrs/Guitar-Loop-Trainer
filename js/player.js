@@ -114,7 +114,7 @@ function createPlayerNocookie(videoId) {
 
 function onPlayerError(event) {
     const code = event.data;
-    console.error('[Guitar Looper Trainer] Player error', code);
+    console.error('[Guitar Loop Trainer] Player error', code);
     if ((code === 101 || code === 150) && !state.usingNocookie) {
         showToast('Embedding blocked \u2014 retrying with alternate player\u2026', 'accent');
         createPlayerNocookie(state.currentVideoId);
@@ -126,7 +126,7 @@ function onPlayerError(event) {
 
 function onPlayerErrorFinal(event) {
     const code = event.data;
-    console.error('[Guitar Looper Trainer] Alternate player error', code);
+    console.error('[Guitar Loop Trainer] Alternate player error', code);
     showEmbedBlockedFallback();
 }
 

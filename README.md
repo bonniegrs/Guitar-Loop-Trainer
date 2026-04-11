@@ -1,4 +1,4 @@
-# Guitar Looper Trainer
+# Guitar Loop Trainer
 
 **Video Loop & Speed Trainer** — A web app for practicing guitar (or any instrument) along with online videos. Set A/B loop regions, slow down playback, use a built-in metronome with progressive tempo, and manage a playlist of practice sessions — all from your browser.
 
@@ -135,6 +135,11 @@ Guitar-Loop-Trainer/
 ├── screenshots/         # README screenshots
 ├── favicon.svg          # Guitar-pick tab icon
 ├── start.bat            # Windows launcher script
+├── tests/               # Unit tests (Vitest)
+├── e2e/                 # End-to-end tests (Playwright)
+├── package.json         # Dev dependencies and scripts
+├── vitest.config.js     # Unit test configuration
+├── playwright.config.js # E2E test configuration
 ├── .editorconfig        # Editor formatting rules
 ├── .gitignore
 ├── LICENSE              # MIT License
@@ -155,6 +160,37 @@ No build step, no bundler, no framework — vanilla ES modules loaded natively b
 | Metadata | [noembed.com](https://noembed.com) (video title resolution) |
 | Fonts | [Inter](https://fonts.google.com/specimen/Inter) via Google Fonts |
 | Persistence | `localStorage` |
+| Testing | [Vitest](https://vitest.dev/) + [Playwright](https://playwright.dev/) |
+
+---
+
+## Testing
+
+### Unit Tests (Vitest)
+
+Cover pure logic: URL parsing, time formatting, HTML escaping, localStorage round-trips, speed/BPM clamping, and config constants.
+
+```bash
+npm install
+npm test
+```
+
+### End-to-End Tests (Playwright)
+
+Launch a real browser and verify the full app: page load, UI elements, speed/loop/metronome controls, playlist auto-load, keyboard shortcuts, and responsive layout.
+
+```bash
+npx playwright install chromium   # first time only
+npm run test:e2e
+```
+
+### Run Everything
+
+```bash
+npm run test:all
+```
+
+For the full testing guide (debugging, watch mode, adding new tests), see [TESTING.md](TESTING.md).
 
 ---
 

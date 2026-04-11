@@ -1,7 +1,7 @@
 @echo off
-title Guitar Looper Trainer
+title Guitar Loop Trainer
 echo ============================================
-echo   Guitar Looper Trainer - Starting...
+echo   Guitar Loop Trainer - Starting...
 echo ============================================
 echo.
 echo Opening http://localhost:3000 in your browser...

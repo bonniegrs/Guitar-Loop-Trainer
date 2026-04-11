@@ -213,6 +213,14 @@ For the full testing guide (debugging, watch mode, adding new tests), see [TESTI
 
 ---
 
+## Support
+
+If this tool helps your practice, buy me a coffee!
+
+[![PayPal](https://img.shields.io/badge/Buy%20Me%20a%20Coffee%20%E2%98%95-PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://paypal.me/bonniegrs)
+
+---
+
 ## Contributing
 
 Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.

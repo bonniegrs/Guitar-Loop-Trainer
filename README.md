@@ -115,16 +115,33 @@ Install the [Live Server](https://marketplace.visualstudio.com/items?itemName=ri
 
 ```
 Guitar-Loop-Trainer/
-├── index.html       # Single-page app shell
-├── app.js           # Application logic (~1300 lines)
-├── styles.css       # Full theme and layout (~1400 lines)
-├── playlist.json    # Sample playlist (auto-loaded on first visit)
-├── favicon.svg      # Guitar-pick tab icon
-├── start.bat        # Windows launcher script
+├── index.html           # Single-page app shell
+├── styles.css           # Full theme and layout
+├── js/
+│   ├── app.js           # Entry point — imports modules, wires events, init
+│   ├── config.js        # Application-wide constants
+│   ├── state.js         # Shared mutable state
+│   ├── dom.js           # Cached DOM element references
+│   ├── utils.js         # Pure helpers (formatTime, escapeHtml)
+│   ├── toast.js         # Toast notification system
+│   ├── storage.js       # localStorage persistence layer
+│   ├── player.js        # Video player lifecycle and transport
+│   ├── loop.js          # A/B loop region and timeline
+│   ├── speed.js         # Playback speed control
+│   ├── metronome.js     # Web Audio metronome + progressive tempo
+│   ├── playlist.js      # Playlist UI, drag-and-drop, import/export
+│   └── shortcuts.js     # Keyboard shortcut handler
+├── playlist.json        # Sample playlist (auto-loaded on first visit)
+├── screenshots/         # README screenshots
+├── favicon.svg          # Guitar-pick tab icon
+├── start.bat            # Windows launcher script
+├── .editorconfig        # Editor formatting rules
+├── .gitignore
+├── LICENSE              # MIT License
 └── README.md
 ```
 
-No build step, no bundler, no framework — just vanilla HTML, CSS, and JavaScript.
+No build step, no bundler, no framework — vanilla ES modules loaded natively by the browser.
 
 ---
 

@@ -143,6 +143,12 @@ No build step, no bundler, no framework — just vanilla HTML, CSS, and JavaScri
 
 ---
 
+## Disclaimer
+
+This application embeds third-party video content. All video and audio materials are the property of their original creators and copyright holders. This tool does not host, download, or redistribute any media content.
+
 ## License
 
-This is a personal project by [@bonniegrs](https://github.com/bonniegrs).
+This project is licensed under the [MIT License](LICENSE).
+
+Copyright (c) 2026 [@bonniegrs](https://github.com/bonniegrs)

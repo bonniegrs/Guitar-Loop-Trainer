@@ -17,6 +17,11 @@ node_modules/
 *.log
 npm-debug.log*
 
-# Playwright
+# Environment
+.env
+.env.*
+
+# Test output
 test-results/
 playwright-report/
+coverage/

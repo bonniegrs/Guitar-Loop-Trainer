@@ -3,6 +3,7 @@
  * @module app
  */
 
+import { HOLD_DELAY_MS, HOLD_REPEAT_MS } from './config.js';
 import { state } from './state.js';
 import { dom } from './dom.js';
 import { showToast } from './toast.js';
@@ -180,8 +181,8 @@ document.querySelectorAll('.prog-adj').forEach(btn => {
         const dir = parseInt(btn.dataset.dir);
         progAdjust(target, dir);
         holdTimer = setTimeout(() => {
-            holdInterval = setInterval(() => progAdjust(target, dir), 80);
-        }, 400);
+            holdInterval = setInterval(() => progAdjust(target, dir), HOLD_REPEAT_MS);
+        }, HOLD_DELAY_MS);
     }
 
     function stopHold() {

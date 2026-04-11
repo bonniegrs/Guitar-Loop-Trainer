@@ -3,7 +3,7 @@
  * @module speed
  */
 
-import { SPEED_MIN, SPEED_MAX } from './config.js';
+import { SPEED_MIN, SPEED_MAX, SPEED_MATCH_EPSILON } from './config.js';
 import { state } from './state.js';
 import { dom } from './dom.js';
 import { saveCurrentVideoSettings } from './storage.js';
@@ -16,8 +16,17 @@ export function updateSpeedDisplay() {
     dom.speedValue.textContent = state.currentSpeed.toFixed(2) + 'x';
     dom.speedLabels.forEach(label => {
         const val = parseFloat(label.dataset.value);
-        label.classList.toggle('active', Math.abs(val - state.currentSpeed) < 0.01);
+        label.classList.toggle('active', Math.abs(val - state.currentSpeed) < SPEED_MATCH_EPSILON);
     });
+}
+
+/**
+ * Clamp a playback rate to the valid range and round to two decimals.
+ * @param {number} rate
+ * @returns {number}
+ */
+export function clampSpeed(rate) {
+    return Math.round(Math.max(SPEED_MIN, Math.min(SPEED_MAX, rate)) * 100) / 100;
 }
 
 /**
@@ -25,7 +34,7 @@ export function updateSpeedDisplay() {
  * @param {number} rate
  */
 export function setSpeed(rate) {
-    state.currentSpeed = Math.round(Math.max(SPEED_MIN, Math.min(SPEED_MAX, rate)) * 100) / 100;
+    state.currentSpeed = clampSpeed(rate);
     dom.speedSlider.value = state.currentSpeed;
     updateSpeedDisplay();
     if (state.playerReady && state.player) {

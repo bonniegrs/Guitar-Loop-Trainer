@@ -3,7 +3,10 @@
  * @module storage
  */
 
-import { STORAGE_KEY, MAX_PLAYLIST } from './config.js';
+import {
+    STORAGE_KEY, MAX_PLAYLIST, DEBOUNCE_SAVE_MS,
+    PROG_DEFAULT_START, PROG_DEFAULT_END, PROG_DEFAULT_STEP, PROG_DEFAULT_BARS,
+} from './config.js';
 import { state } from './state.js';
 import { dom } from './dom.js';
 
@@ -25,7 +28,11 @@ export function loadPlaylist() {
  * @param {Array<Object>} list
  */
 export function savePlaylist(list) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+    try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+    } catch {
+        // QuotaExceededError or security restriction — silently degrade
+    }
 }
 
 /**
@@ -87,10 +94,10 @@ export function saveCurrentVideoSettings() {
     item.bpm = state.metroBpm;
     item.metroVolume = state.metroVolume;
     item.progEnabled = state.progEnabled;
-    item.progStart = parseInt(dom.progStartBpm.dataset.value) || 85;
-    item.progEnd = parseInt(dom.progEndBpm.dataset.value) || 110;
-    item.progStep = parseInt(dom.progStep.value) || 5;
-    item.progBars = parseInt(dom.progBars.value) || 4;
+    item.progStart = parseInt(dom.progStartBpm.dataset.value) || PROG_DEFAULT_START;
+    item.progEnd = parseInt(dom.progEndBpm.dataset.value) || PROG_DEFAULT_END;
+    item.progStep = parseInt(dom.progStep.value) || PROG_DEFAULT_STEP;
+    item.progBars = parseInt(dom.progBars.value) || PROG_DEFAULT_BARS;
     savePlaylist(list);
 }
 
@@ -99,7 +106,5 @@ export function saveCurrentVideoSettings() {
  */
 export function debouncedSave() {
     clearTimeout(state.saveTimer);
-    state.saveTimer = setTimeout(() => {
-        saveCurrentVideoSettings();
-    }, 500);
+    state.saveTimer = setTimeout(saveCurrentVideoSettings, DEBOUNCE_SAVE_MS);
 }

@@ -3,7 +3,12 @@
  * @module metronome
  */
 
-import { METRO_SCHEDULE_AHEAD, METRO_LOOKAHEAD_MS } from './config.js';
+import {
+    BPM_MIN, BPM_MAX, METRO_SCHEDULE_AHEAD, METRO_LOOKAHEAD_MS,
+    METRO_ACCENT_FREQ, METRO_NORMAL_FREQ, METRO_ACCENT_GAIN, METRO_NORMAL_GAIN,
+    METRO_NOTE_DURATION, BEATS_PER_BAR,
+    PROG_DEFAULT_START, PROG_DEFAULT_END, PROG_DEFAULT_STEP, PROG_DEFAULT_BARS,
+} from './config.js';
 import { state } from './state.js';
 import { dom } from './dom.js';
 import { showToast } from './toast.js';
@@ -17,11 +22,11 @@ function metroClick(time, accent) {
     const gain = state.metroAudioCtx.createGain();
     osc.connect(gain);
     gain.connect(state.metroMasterGain);
-    osc.frequency.value = accent ? 1200 : 800;
-    gain.gain.setValueAtTime(accent ? 0.6 : 0.3, time);
-    gain.gain.exponentialRampToValueAtTime(0.001, time + 0.04);
+    osc.frequency.value = accent ? METRO_ACCENT_FREQ : METRO_NORMAL_FREQ;
+    gain.gain.setValueAtTime(accent ? METRO_ACCENT_GAIN : METRO_NORMAL_GAIN, time);
+    gain.gain.exponentialRampToValueAtTime(0.001, time + METRO_NOTE_DURATION);
     osc.start(time);
-    osc.stop(time + 0.04);
+    osc.stop(time + METRO_NOTE_DURATION);
 }
 
 function flashDot(idx) {
@@ -32,16 +37,19 @@ function flashDot(idx) {
 }
 
 function metroScheduler() {
+    if (!state.metroPlaying || !state.metroAudioCtx) return;
     while (state.metroNextNoteTime < state.metroAudioCtx.currentTime + METRO_SCHEDULE_AHEAD) {
-        const accent = state.metroBeatCount % 4 === 0;
+        const accent = state.metroBeatCount % BEATS_PER_BAR === 0;
         metroClick(state.metroNextNoteTime, accent);
 
-        const beatIdx = state.metroBeatCount % 4;
+        const beatIdx = state.metroBeatCount % BEATS_PER_BAR;
         const delay = Math.max(0, (state.metroNextNoteTime - state.metroAudioCtx.currentTime) * 1000);
-        setTimeout(() => {
+        const id = setTimeout(() => {
+            if (!state.metroPlaying) return;
             flashDot(beatIdx);
             progOnBeat();
         }, delay);
+        state.pendingBeatTimers.push(id);
 
         state.metroNextNoteTime += 60.0 / state.metroBpm;
         state.metroBeatCount++;
@@ -52,11 +60,11 @@ function metroScheduler() {
 // ─── Progressive Tempo ─────────────────────────
 
 function progCalcTotalBeats() {
-    const startVal = parseInt(dom.progStartBpm.dataset.value) || 85;
-    const endVal = parseInt(dom.progEndBpm.dataset.value) || 110;
-    const stepVal = parseInt(dom.progStep.value) || 5;
-    const barsVal = parseInt(dom.progBars.value) || 4;
-    const beatsPerStep = barsVal * 4;
+    const startVal = parseInt(dom.progStartBpm.dataset.value) || PROG_DEFAULT_START;
+    const endVal = parseInt(dom.progEndBpm.dataset.value) || PROG_DEFAULT_END;
+    const stepVal = parseInt(dom.progStep.value) || PROG_DEFAULT_STEP;
+    const barsVal = parseInt(dom.progBars.value) || PROG_DEFAULT_BARS;
+    const beatsPerStep = barsVal * BEATS_PER_BAR;
     const steps = Math.ceil((endVal - startVal) / stepVal);
     return steps * beatsPerStep;
 }
@@ -64,13 +72,13 @@ function progCalcTotalBeats() {
 function progUpdateProgress() {
     const total = progCalcTotalBeats();
     const pct = total > 0 ? (state.progTotalBeats / total) * 100 : 0;
-    const endVal = parseInt(dom.progEndBpm.dataset.value) || 110;
+    const endVal = parseInt(dom.progEndBpm.dataset.value) || PROG_DEFAULT_END;
     dom.progFill.style.width = Math.min(100, Math.max(0, pct)) + '%';
     dom.progText.textContent = state.progCurrentBpm + ' / ' + endVal + ' BPM';
 }
 
 function progReset() {
-    state.progCurrentBpm = parseInt(dom.progStartBpm.dataset.value) || 85;
+    state.progCurrentBpm = parseInt(dom.progStartBpm.dataset.value) || PROG_DEFAULT_START;
     state.progBeatsInStep = 0;
     state.progTotalBeats = 0;
     setMetroBpm(state.progCurrentBpm, true);
@@ -81,10 +89,10 @@ function progReset() {
 function progOnBeat() {
     if (!state.progEnabled) return;
 
-    const endVal = parseInt(dom.progEndBpm.dataset.value) || 110;
-    const stepVal = parseInt(dom.progStep.value) || 5;
-    const barsVal = parseInt(dom.progBars.value) || 4;
-    const beatsPerStep = barsVal * 4;
+    const endVal = parseInt(dom.progEndBpm.dataset.value) || PROG_DEFAULT_END;
+    const stepVal = parseInt(dom.progStep.value) || PROG_DEFAULT_STEP;
+    const barsVal = parseInt(dom.progBars.value) || PROG_DEFAULT_BARS;
+    const beatsPerStep = barsVal * BEATS_PER_BAR;
 
     state.progBeatsInStep++;
     if (state.progCurrentBpm < endVal) state.progTotalBeats++;
@@ -102,12 +110,21 @@ function progOnBeat() {
 // ─── Public API ────────────────────────────────
 
 /**
- * Set the metronome BPM (clamped 30–300).
+ * Clamp a BPM value to the valid range and round to an integer.
+ * @param {number} val
+ * @returns {number}
+ */
+export function clampBpm(val) {
+    return Math.max(BPM_MIN, Math.min(BPM_MAX, Math.round(val)));
+}
+
+/**
+ * Set the metronome BPM (clamped to BPM_MIN–BPM_MAX).
  * @param {number} val
  * @param {boolean} [skipSave=false]
  */
 export function setMetroBpm(val, skipSave) {
-    state.metroBpm = Math.max(30, Math.min(300, Math.round(val)));
+    state.metroBpm = clampBpm(val);
     dom.metroBpmValue.textContent = state.metroBpm;
     dom.bpmSlider.value = state.metroBpm;
     if (!skipSave) debouncedSave();
@@ -137,6 +154,8 @@ export function stopMetronome() {
     state.metroPlaying = false;
     clearTimeout(state.metroTimerId);
     state.metroTimerId = null;
+    state.pendingBeatTimers.forEach(id => clearTimeout(id));
+    state.pendingBeatTimers = [];
     dom.metroToggleBtn.classList.remove('active');
     dom.metroIconPlay.style.display = '';
     dom.metroIconStop.style.display = 'none';
@@ -209,7 +228,7 @@ export function restoreMetroSettings(item) {
  */
 export function progAdjust(target, dir) {
     let val = parseInt(target.dataset.value) + dir;
-    val = Math.max(30, Math.min(300, val));
+    val = Math.max(BPM_MIN, Math.min(BPM_MAX, val));
     target.dataset.value = val;
     target.textContent = val;
 }

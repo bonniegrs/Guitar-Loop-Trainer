@@ -2,8 +2,11 @@ import { describe, it, expect } from 'vitest';
 import {
     STORAGE_KEY, MAX_PLAYLIST,
     SPEED_MIN, SPEED_MAX, SPEED_STEP,
+    BPM_MIN, BPM_MAX,
     METRO_SCHEDULE_AHEAD, METRO_LOOKAHEAD_MS,
 } from '../js/config.js';
+import { clampSpeed } from '../js/speed.js';
+import { clampBpm } from '../js/metronome.js';
 
 describe('config constants', () => {
     it('defines a localStorage key', () => {
@@ -23,17 +26,19 @@ describe('config constants', () => {
         expect(SPEED_STEP).toBeLessThan(SPEED_MAX - SPEED_MIN);
     });
 
+    it('defines valid BPM bounds', () => {
+        expect(BPM_MIN).toBe(30);
+        expect(BPM_MAX).toBe(300);
+        expect(BPM_MIN).toBeLessThan(BPM_MAX);
+    });
+
     it('defines metronome scheduling parameters', () => {
         expect(METRO_SCHEDULE_AHEAD).toBeGreaterThan(0);
         expect(METRO_LOOKAHEAD_MS).toBeGreaterThan(0);
     });
 });
 
-describe('speed clamping logic', () => {
-    function clampSpeed(rate) {
-        return Math.round(Math.max(SPEED_MIN, Math.min(SPEED_MAX, rate)) * 100) / 100;
-    }
-
+describe('clampSpeed (from speed.js)', () => {
     it('clamps below minimum to SPEED_MIN', () => {
         expect(clampSpeed(0)).toBe(SPEED_MIN);
         expect(clampSpeed(-1)).toBe(SPEED_MIN);
@@ -58,20 +63,16 @@ describe('speed clamping logic', () => {
     });
 });
 
-describe('BPM clamping logic', () => {
-    function clampBpm(val) {
-        return Math.max(30, Math.min(300, Math.round(val)));
-    }
-
-    it('clamps below minimum to 30', () => {
-        expect(clampBpm(0)).toBe(30);
-        expect(clampBpm(-10)).toBe(30);
-        expect(clampBpm(29)).toBe(30);
+describe('clampBpm (from metronome.js)', () => {
+    it('clamps below minimum to BPM_MIN', () => {
+        expect(clampBpm(0)).toBe(BPM_MIN);
+        expect(clampBpm(-10)).toBe(BPM_MIN);
+        expect(clampBpm(29)).toBe(BPM_MIN);
     });
 
-    it('clamps above maximum to 300', () => {
-        expect(clampBpm(301)).toBe(300);
-        expect(clampBpm(999)).toBe(300);
+    it('clamps above maximum to BPM_MAX', () => {
+        expect(clampBpm(301)).toBe(BPM_MAX);
+        expect(clampBpm(999)).toBe(BPM_MAX);
     });
 
     it('preserves values within range', () => {

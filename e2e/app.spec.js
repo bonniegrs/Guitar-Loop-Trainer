@@ -4,9 +4,12 @@ test.describe('Page Load', () => {
     test('loads without console errors', async ({ page }) => {
         const errors = [];
         page.on('pageerror', err => errors.push(err.message));
+        page.on('console', msg => {
+            if (msg.type() === 'error') errors.push(msg.text());
+        });
 
         await page.goto('/');
-        await page.waitForLoadState('networkidle');
+        await expect(page.locator('h1')).toBeVisible();
 
         expect(errors).toEqual([]);
     });
@@ -151,18 +154,16 @@ test.describe('Metronome', () => {
 test.describe('Playlist Sidebar', () => {
     test('auto-loads sample playlist from playlist.json', async ({ page }) => {
         await page.goto('/');
-        await page.waitForLoadState('networkidle');
-
         const items = page.locator('.playlist-item');
+        await expect(items.first()).toBeVisible({ timeout: 5000 });
         const count = await items.count();
         expect(count).toBeGreaterThanOrEqual(1);
     });
 
     test('playlist items show title and metadata', async ({ page }) => {
         await page.goto('/');
-        await page.waitForLoadState('networkidle');
-
         const firstTitle = page.locator('.playlist-item-title').first();
+        await expect(firstTitle).toBeVisible({ timeout: 5000 });
         const text = await firstTitle.textContent();
         expect(text.length).toBeGreaterThan(0);
     });
@@ -175,12 +176,9 @@ test.describe('Playlist Sidebar', () => {
 });
 
 test.describe('Keyboard Shortcuts', () => {
-    test('Space bar shows a toast (no video loaded)', async ({ page }) => {
+    test('Space bar does not break the page when no video is loaded', async ({ page }) => {
         await page.goto('/');
         await page.locator('body').press('Space');
-
-        // No video loaded, so no action — but no error either
-        // Verify page is still functional
         await expect(page.locator('h1')).toHaveText('Guitar Loop Trainer');
     });
 

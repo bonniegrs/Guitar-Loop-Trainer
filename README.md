@@ -69,7 +69,7 @@
 | `L` | Toggle loop on/off |
 | `-` | Decrease speed |
 | `+` / `=` | Increase speed |
-| `Left` / `Right` | Volume down / up |
+| `↑` / `↓` | Volume up / down |
 | `M` | Mute / Unmute |
 | `T` | Toggle metronome |
 | `Home` | Seek to beginning of video |

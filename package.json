@@ -5,6 +5,14 @@
   "description": "Video Loop & Speed Trainer for guitar practice.",
   "license": "MIT",
   "author": "bonniegrs",
+  "homepage": "https://bonniegrs.github.io/Guitar-Loop-Trainer/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bonniegrs/Guitar-Loop-Trainer.git"
+  },
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "start": "npx serve -l 3000",
     "test": "vitest run",

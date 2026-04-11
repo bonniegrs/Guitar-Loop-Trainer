@@ -3,6 +3,7 @@
  * @module loop
  */
 
+import { MIN_LOOP_WIDTH_PCT } from './config.js';
 import { state } from './state.js';
 import { dom } from './dom.js';
 import { formatTime } from './utils.js';
@@ -36,11 +37,11 @@ export function updateLoopVisuals() {
 
 /** Set the loop-start marker to the current playback position. */
 export function setLoopStartToCurrent() {
-    if (!state.playerReady || !state.player) return;
+    if (!state.playerReady || !state.player || state.videoDuration <= 0) return;
     const t = state.player.getCurrentTime();
     state.loopStartPercent = (t / state.videoDuration) * 100;
     if (state.loopStartPercent >= state.loopEndPercent) {
-        state.loopStartPercent = state.loopEndPercent - 0.5;
+        state.loopStartPercent = state.loopEndPercent - MIN_LOOP_WIDTH_PCT;
     }
     updateLoopVisuals();
     saveCurrentVideoSettings();
@@ -50,11 +51,11 @@ export function setLoopStartToCurrent() {
 
 /** Set the loop-end marker to the current playback position. */
 export function setLoopEndToCurrent() {
-    if (!state.playerReady || !state.player) return;
+    if (!state.playerReady || !state.player || state.videoDuration <= 0) return;
     const t = state.player.getCurrentTime();
     state.loopEndPercent = (t / state.videoDuration) * 100;
     if (state.loopEndPercent <= state.loopStartPercent) {
-        state.loopEndPercent = state.loopStartPercent + 0.5;
+        state.loopEndPercent = state.loopStartPercent + MIN_LOOP_WIDTH_PCT;
     }
     updateLoopVisuals();
     saveCurrentVideoSettings();
@@ -103,9 +104,9 @@ export function onDocumentMouseMove(e) {
     pct = Math.max(0, Math.min(100, pct));
 
     if (state.dragging === 'start') {
-        state.loopStartPercent = Math.min(pct, state.loopEndPercent - 0.5);
+        state.loopStartPercent = Math.min(pct, state.loopEndPercent - MIN_LOOP_WIDTH_PCT);
     } else {
-        state.loopEndPercent = Math.max(pct, state.loopStartPercent + 0.5);
+        state.loopEndPercent = Math.max(pct, state.loopStartPercent + MIN_LOOP_WIDTH_PCT);
     }
     updateLoopVisuals();
 }

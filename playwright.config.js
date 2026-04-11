@@ -14,6 +14,6 @@ export default defineConfig({
     webServer: {
         command: 'npx serve -l 3001',
         port: 3001,
-        reuseExistingServer: true,
+        reuseExistingServer: !process.env.CI,
     },
 });

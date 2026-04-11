@@ -26,6 +26,7 @@ export const state = {
     metroTimerId: null,
     metroNextNoteTime: 0,
     metroBeatCount: 0,
+    pendingBeatTimers: [],
 
     // Progressive tempo
     progEnabled: false,

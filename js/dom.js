@@ -56,7 +56,8 @@ export const dom = {
     bpmPlusBtn: document.getElementById('bpmPlusBtn'),
     tapTempoBtn: document.getElementById('tapTempoBtn'),
     metroBeatDots: document.getElementById('metroBeatDots'),
-    metroDots: document.getElementById('metroBeatDots').querySelectorAll('.metro-dot'),
+    metroDots: (document.getElementById('metroBeatDots') || document.createElement('div'))
+        .querySelectorAll('.metro-dot'),
     metroVolSlider: document.getElementById('metroVolSlider'),
     metroVolLabel: document.getElementById('metroVolLabel'),
     metroMuteBtn: document.getElementById('metroMuteBtn'),

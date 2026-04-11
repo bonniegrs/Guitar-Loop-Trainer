@@ -87,7 +87,9 @@ E2E tests launch a **real Chromium browser**, open the app, and interact with it
 npm run test:e2e
 ```
 
-This starts a local server automatically, runs all tests in headless Chromium, then stops the server. Expected output:
+Playwright serves the app on **port 3001** (configured in `playwright.config.js`), separate from the default **port 3000** used by `start.bat` and `npm start`, so you can keep a development server running without port conflicts.
+
+Expected output:
 
 ```
   29 passed (58.6s)

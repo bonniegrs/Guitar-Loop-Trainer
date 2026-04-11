@@ -182,16 +182,22 @@ export async function exportPlaylist() {
  * @param {File} file
  * @param {Function} [onComplete] - Called after successful import
  */
+function isValidPlaylistItem(item) {
+    return item && typeof item.videoId === 'string' && /^[\w-]{11}$/.test(item.videoId);
+}
+
 export function importPlaylist(file, onComplete) {
     const reader = new FileReader();
     reader.onload = function (e) {
         try {
             const data = JSON.parse(e.target.result);
             if (!Array.isArray(data)) throw new Error('Invalid format');
-            savePlaylist(data);
+            const valid = data.filter(isValidPlaylistItem);
+            if (valid.length === 0) throw new Error('No valid entries');
+            savePlaylist(valid);
             renderPlaylist();
             if (onComplete) onComplete();
-            showToast('Loaded ' + data.length + ' videos from file', 'success');
+            showToast('Loaded ' + valid.length + ' videos from file', 'success');
         } catch {
             showToast('Invalid playlist file', 'danger');
         }
@@ -216,7 +222,6 @@ export async function autoLoadFromFile(onComplete) {
         savePlaylist(data);
         renderPlaylist();
         if (onComplete) onComplete();
-        console.log('[Guitar Loop Trainer] Restored', data.length, 'videos from playlist.json');
     } catch {
         // playlist.json not found or invalid — that is fine
     }

@@ -3,6 +3,7 @@
  * @module toast
  */
 
+import { TOAST_DISPLAY_MS, TOAST_EXIT_MS } from './config.js';
 import { dom } from './dom.js';
 
 /**
@@ -14,10 +15,11 @@ export function showToast(message, type) {
     type = type || 'accent';
     const el = document.createElement('div');
     el.className = 'toast toast-' + type;
+    el.setAttribute('role', type === 'danger' ? 'alert' : 'status');
     el.textContent = message;
     dom.toastContainer.appendChild(el);
     setTimeout(() => {
         el.classList.add('toast-out');
-        setTimeout(() => el.remove(), 300);
-    }, 2200);
+        setTimeout(() => el.remove(), TOAST_EXIT_MS);
+    }, TOAST_DISPLAY_MS);
 }

@@ -3,7 +3,7 @@
  * @module shortcuts
  */
 
-import { SPEED_STEP } from './config.js';
+import { SPEED_STEP, VOLUME_STEP } from './config.js';
 import { state } from './state.js';
 import { dom } from './dom.js';
 import { showToast } from './toast.js';
@@ -47,19 +47,20 @@ export function handleShortcut(e) {
         showToast('Speed: ' + state.currentSpeed.toFixed(2) + 'x', 'accent');
     } else if (code === 'ArrowUp') {
         e.preventDefault();
-        const vUp = Math.min(100, parseInt(dom.volumeSlider.value) + 5);
+        const vUp = Math.min(100, parseInt(dom.volumeSlider.value) + VOLUME_STEP);
         dom.volumeSlider.value = vUp;
         setVolume(vUp);
         showToast('Volume: ' + vUp + '%', 'accent');
     } else if (code === 'ArrowDown') {
         e.preventDefault();
-        const vDn = Math.max(0, parseInt(dom.volumeSlider.value) - 5);
+        const vDn = Math.max(0, parseInt(dom.volumeSlider.value) - VOLUME_STEP);
         dom.volumeSlider.value = vDn;
         setVolume(vDn);
         showToast('Volume: ' + vDn + '%', 'accent');
     } else if (code === 'KeyM') {
+        if (!state.playerReady || !state.player) return;
         toggleMute();
-        showToast(state.player && state.player.isMuted() ? 'Muted' : 'Unmuted', 'accent');
+        showToast(state.player.isMuted() ? 'Muted' : 'Unmuted', 'accent');
     } else if (code === 'KeyT') {
         toggleMetronome();
         showToast('Metronome ' + (state.metroPlaying ? 'ON' : 'OFF'), 'accent');

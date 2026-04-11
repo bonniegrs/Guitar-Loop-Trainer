@@ -3,6 +3,7 @@
  * @module player
  */
 
+import { MONITOR_INTERVAL_MS } from './config.js';
 import { state } from './state.js';
 import { dom } from './dom.js';
 import { showToast } from './toast.js';
@@ -114,7 +115,6 @@ function createPlayerNocookie(videoId) {
 
 function onPlayerError(event) {
     const code = event.data;
-    console.error('[Guitar Loop Trainer] Player error', code);
     if ((code === 101 || code === 150) && !state.usingNocookie) {
         showToast('Embedding blocked \u2014 retrying with alternate player\u2026', 'accent');
         createPlayerNocookie(state.currentVideoId);
@@ -124,9 +124,7 @@ function onPlayerError(event) {
     }
 }
 
-function onPlayerErrorFinal(event) {
-    const code = event.data;
-    console.error('[Guitar Loop Trainer] Alternate player error', code);
+function onPlayerErrorFinal() {
     showEmbedBlockedFallback();
 }
 
@@ -229,10 +227,10 @@ function onPlayerStateChange(event) {
 
 // ─── Playback Monitor ──────────────────────────
 
-/** Start the 100 ms polling loop that updates the playhead and enforces loop boundaries. */
+/** Start the polling loop that updates the playhead and enforces loop boundaries. */
 export function startMonitor() {
     if (state.monitorInterval) return;
-    state.monitorInterval = setInterval(monitorPlayback, 100);
+    state.monitorInterval = setInterval(monitorPlayback, MONITOR_INTERVAL_MS);
 }
 
 /** Stop the playback-monitoring interval. */
@@ -354,8 +352,9 @@ export function extractVideoId(url) {
 export async function fetchVideoTitle(videoId) {
     try {
         const res = await fetch('https://noembed.com/embed?url=https://www.youtube.com/watch?v=' + videoId);
+        if (!res.ok) return 'Untitled Video';
         const data = await res.json();
-        return data.title || 'Untitled Video';
+        return (typeof data.title === 'string' && data.title) ? data.title : 'Untitled Video';
     } catch {
         return 'Untitled Video';
     }

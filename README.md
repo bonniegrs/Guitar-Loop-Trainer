@@ -9,6 +9,14 @@
 
 ---
 
+### Video Player, Loop Region & Playlist
+![Video Player](screenshots/video-player.png)
+
+### Metronome & Progressive Tempo
+![Metronome](screenshots/metronome.png)
+
+---
+
 ## Features
 
 ### Video Playback
@@ -130,16 +138,6 @@ No build step, no bundler, no framework — just vanilla HTML, CSS, and JavaScri
 | Metadata | [noembed.com](https://noembed.com) (video title resolution) |
 | Fonts | [Inter](https://fonts.google.com/specimen/Inter) via Google Fonts |
 | Persistence | `localStorage` |
-
----
-
-## Screenshots
-
-### Video Player, Loop Region & Playlist
-![Video Player](screenshots/video-player.png)
-
-### Metronome & Progressive Tempo
-![Metronome](screenshots/metronome.png)
 
 ---
 

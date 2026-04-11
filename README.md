@@ -7,6 +7,8 @@
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
 ![Web Audio](https://img.shields.io/badge/Web%20Audio-API-FF6F00?style=flat&logo=audiomack&logoColor=white)
 
+**[Live Demo](https://bonniegrs.github.io/Guitar-Loop-Trainer/)** — try it instantly in your browser, no install needed.
+
 ---
 
 ### Video Player, Loop Region & Playlist

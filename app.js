@@ -144,7 +144,7 @@
 
     function onPlayerError(event) {
         const code = event.data;
-        console.error('[Guitar Practice Studio] YT error', code);
+        console.error('[Guitar Looper Trainer] YT error', code);
         if ((code === 101 || code === 150) && !usingNocookie) {
             showToast('Embedding blocked — retrying with alternate player...', 'accent');
             createPlayerNocookie(currentVideoId);
@@ -156,7 +156,7 @@
 
     function onPlayerErrorFinal(event) {
         const code = event.data;
-        console.error('[Guitar Practice Studio] YT nocookie error', code);
+        console.error('[Guitar Looper Trainer] YT nocookie error', code);
         showEmbedBlockedFallback();
     }
 
@@ -704,7 +704,7 @@
             savePlaylist(data);
             renderPlaylist();
             restoreCurrentVideoSettings();
-            console.log('[Guitar Practice Studio] Restored', data.length, 'videos from playlist.json');
+            console.log('[Guitar Looper Trainer] Restored', data.length, 'videos from playlist.json');
         } catch {
             // no file found or invalid — that's fine
         }

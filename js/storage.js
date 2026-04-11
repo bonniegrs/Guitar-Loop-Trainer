@@ -4,8 +4,13 @@
  */
 
 import {
-    STORAGE_KEY, MAX_PLAYLIST, DEBOUNCE_SAVE_MS,
-    PROG_DEFAULT_START, PROG_DEFAULT_END, PROG_DEFAULT_STEP, PROG_DEFAULT_BARS,
+    STORAGE_KEY,
+    MAX_PLAYLIST,
+    DEBOUNCE_SAVE_MS,
+    PROG_DEFAULT_START,
+    PROG_DEFAULT_END,
+    PROG_DEFAULT_STEP,
+    PROG_DEFAULT_BARS,
 } from './config.js';
 import { state } from './state.js';
 import { dom } from './dom.js';

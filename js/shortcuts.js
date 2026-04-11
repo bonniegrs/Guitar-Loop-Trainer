@@ -8,7 +8,12 @@ import { state } from './state.js';
 import { dom } from './dom.js';
 import { showToast } from './toast.js';
 import { togglePlayPause, goToBeginning, toggleMute, setVolume } from './player.js';
-import { setLoopStartToCurrent, setLoopEndToCurrent, restartLoop, updateLoopVisuals } from './loop.js';
+import {
+    setLoopStartToCurrent,
+    setLoopEndToCurrent,
+    restartLoop,
+    updateLoopVisuals,
+} from './loop.js';
 import { setSpeed } from './speed.js';
 import { toggleMetronome } from './metronome.js';
 

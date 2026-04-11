@@ -1,9 +1,14 @@
 import { describe, it, expect } from 'vitest';
 import {
-    STORAGE_KEY, MAX_PLAYLIST,
-    SPEED_MIN, SPEED_MAX, SPEED_STEP,
-    BPM_MIN, BPM_MAX,
-    METRO_SCHEDULE_AHEAD, METRO_LOOKAHEAD_MS,
+    STORAGE_KEY,
+    MAX_PLAYLIST,
+    SPEED_MIN,
+    SPEED_MAX,
+    SPEED_STEP,
+    BPM_MIN,
+    BPM_MAX,
+    METRO_SCHEDULE_AHEAD,
+    METRO_LOOKAHEAD_MS,
 } from '../js/config.js';
 import { clampSpeed } from '../js/speed.js';
 import { clampBpm } from '../js/metronome.js';

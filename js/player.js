@@ -44,7 +44,11 @@ function prepareWrapper() {
     if (blocked) blocked.remove();
 
     if (state.player && state.player.destroy) {
-        try { state.player.destroy(); } catch (_) { /* ignored */ }
+        try {
+            state.player.destroy();
+        } catch {
+            /* ignored */
+        }
         state.player = null;
         state.playerReady = false;
     }
@@ -131,8 +135,10 @@ function onPlayerErrorFinal() {
 function showEmbedBlockedFallback() {
     const wrapper = document.querySelector('.player-wrapper');
     const startSec = Math.floor((state.loopStartPercent / 100) * state.videoDuration) || 0;
-    const url = 'https://www.youtube.com/watch?v=' + state.currentVideoId
-        + (startSec > 0 ? '&t=' + startSec : '');
+    const url =
+        'https://www.youtube.com/watch?v=' +
+        state.currentVideoId +
+        (startSec > 0 ? '&t=' + startSec : '');
 
     let fallback = wrapper.querySelector('.embed-blocked');
     if (fallback) fallback.remove();
@@ -141,16 +147,18 @@ function showEmbedBlockedFallback() {
     fallback.className = 'embed-blocked';
     fallback.innerHTML =
         '<div class="embed-blocked-inner">' +
-            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="48" height="48">' +
-                '<circle cx="12" cy="12" r="10"/>' +
-                '<line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/>' +
-            '</svg>' +
-            '<h3>Video cannot be embedded</h3>' +
-            '<p>Both standard and privacy-enhanced players were blocked by the video owner.</p>' +
-            '<a href="' + url + '" target="_blank" rel="noopener" class="btn-open-yt">' +
-                '\u25B6 Open on YouTube' +
-            '</a>' +
-            '<span class="embed-blocked-hint">Loop and speed settings cannot be carried over \u2014 try a different video</span>' +
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="48" height="48">' +
+        '<circle cx="12" cy="12" r="10"/>' +
+        '<line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/>' +
+        '</svg>' +
+        '<h3>Video cannot be embedded</h3>' +
+        '<p>Both standard and privacy-enhanced players were blocked by the video owner.</p>' +
+        '<a href="' +
+        url +
+        '" target="_blank" rel="noopener" class="btn-open-yt">' +
+        '\u25B6 Open on YouTube' +
+        '</a>' +
+        '<span class="embed-blocked-hint">Loop and speed settings cannot be carried over \u2014 try a different video</span>' +
         '</div>';
     wrapper.appendChild(fallback);
 }
@@ -164,7 +172,7 @@ function onPlayerReady() {
 
     const item = getPlaylistItem(state.currentVideoId);
 
-    const vol = (item && item.volume !== undefined) ? item.volume : parseInt(dom.volumeSlider.value);
+    const vol = item && item.volume !== undefined ? item.volume : parseInt(dom.volumeSlider.value);
     state.player.setVolume(vol);
     dom.volumeSlider.value = vol;
     dom.volumeLabel.textContent = vol;
@@ -242,7 +250,9 @@ export function stopMonitor() {
 }
 
 function monitorPlayback() {
-    if (!state.playerReady || !state.player || typeof state.player.getCurrentTime !== 'function') return;
+    if (!state.playerReady || !state.player || typeof state.player.getCurrentTime !== 'function') {
+        return;
+    }
 
     const currentTime = state.player.getCurrentTime();
     const percent = state.videoDuration > 0 ? (currentTime / state.videoDuration) * 100 : 0;
@@ -351,10 +361,12 @@ export function extractVideoId(url) {
  */
 export async function fetchVideoTitle(videoId) {
     try {
-        const res = await fetch('https://noembed.com/embed?url=https://www.youtube.com/watch?v=' + videoId);
+        const res = await fetch(
+            'https://noembed.com/embed?url=https://www.youtube.com/watch?v=' + videoId,
+        );
         if (!res.ok) return 'Untitled Video';
         const data = await res.json();
-        return (typeof data.title === 'string' && data.title) ? data.title : 'Untitled Video';
+        return typeof data.title === 'string' && data.title ? data.title : 'Untitled Video';
     } catch {
         return 'Untitled Video';
     }

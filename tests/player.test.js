@@ -7,8 +7,14 @@ describe('extractVideoId', () => {
     });
 
     it('extracts ID from watch URL with extra params', () => {
-        expect(extractVideoId('https://www.youtube.com/watch?v=dQw4w9WgXcQ&t=120')).toBe('dQw4w9WgXcQ');
-        expect(extractVideoId('https://www.youtube.com/watch?list=PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf&v=dQw4w9WgXcQ')).toBe('dQw4w9WgXcQ');
+        expect(extractVideoId('https://www.youtube.com/watch?v=dQw4w9WgXcQ&t=120')).toBe(
+            'dQw4w9WgXcQ',
+        );
+        expect(
+            extractVideoId(
+                'https://www.youtube.com/watch?list=PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf&v=dQw4w9WgXcQ',
+            ),
+        ).toBe('dQw4w9WgXcQ');
     });
 
     it('extracts ID from short youtu.be URL', () => {

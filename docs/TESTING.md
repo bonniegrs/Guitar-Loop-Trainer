@@ -26,17 +26,17 @@ npx playwright install chromium
 
 Unit tests verify individual **functions in isolation** — no browser, no server, no network.
 
-| Test file | Module tested | What's covered |
-|---|---|---|
-| `tests/utils.test.js` | `js/utils.js` | `formatTime` — zero, seconds, minutes, padding, fractional, negative, NaN |
-| | | `escapeHtml` — ampersands, angle brackets, quotes, falsy input |
-| `tests/player.test.js` | `js/player.js` | `extractVideoId` — standard URL, short URL, embed URL, /v/ URL, shorts URL, bare ID, hyphens/underscores, invalid input |
-| `tests/storage.test.js` | `js/storage.js` | `loadPlaylist` / `savePlaylist` — round-trip, empty state, corrupted JSON |
-| | | `addToPlaylist` — ordering, promotion, MAX_PLAYLIST limit, default fields |
-| | | `getPlaylistItem` — found vs. not found |
-| `tests/config.test.js` | `js/config.js` | Constant validity (types, ranges) |
-| | | Speed clamping — below min, above max, in-range, rounding |
-| | | BPM clamping — below 30, above 300, in-range, rounding |
+| Test file               | Module tested   | What's covered                                                                                                          |
+| ----------------------- | --------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `tests/utils.test.js`   | `js/utils.js`   | `formatTime` — zero, seconds, minutes, padding, fractional, negative, NaN                                               |
+|                         |                 | `escapeHtml` — ampersands, angle brackets, quotes, falsy input                                                          |
+| `tests/player.test.js`  | `js/player.js`  | `extractVideoId` — standard URL, short URL, embed URL, /v/ URL, shorts URL, bare ID, hyphens/underscores, invalid input |
+| `tests/storage.test.js` | `js/storage.js` | `loadPlaylist` / `savePlaylist` — round-trip, empty state, corrupted JSON                                               |
+|                         |                 | `addToPlaylist` — ordering, promotion, MAX_PLAYLIST limit, default fields                                               |
+|                         |                 | `getPlaylistItem` — found vs. not found                                                                                 |
+| `tests/config.test.js`  | `js/config.js`  | Constant validity (types, ranges)                                                                                       |
+|                         |                 | Speed clamping — below min, above max, in-range, rounding                                                               |
+|                         |                 | BPM clamping — below 30, above 300, in-range, rounding                                                                  |
 
 ### How to run
 
@@ -69,17 +69,17 @@ Press `q` to quit watch mode.
 
 E2E tests launch a **real Chromium browser**, open the app, and interact with it exactly like a user would — clicking buttons, pressing keys, checking what appears on screen.
 
-| Test group | What's verified |
-|---|---|
-| **Page Load** | No JavaScript console errors, correct page title, header text |
-| **URL Input** | Input and Load button visible, invalid URL shows a toast notification |
-| **Transport Controls** | Play/pause, stop, go-to-start, mute buttons visible; volume defaults to 100 |
-| **Loop Region** | Loop toggle checked by default, A/B/restart/reset buttons visible, time displays show 0:00 |
-| **Speed Control** | Badge shows 1.00x, slider defaults to 1, clicking a preset updates the badge, moving slider updates badge |
-| **Metronome** | BPM shows 120, +/- buttons increment/decrement, 4 beat dots visible, progressive tempo toggle works |
-| **Playlist Sidebar** | Auto-loads videos from `data/playlist.json`, items show titles, export/import buttons visible |
-| **Keyboard Shortcuts** | Space key works, T key toggles metronome with toast, shortcuts are ignored when typing in the URL input |
-| **Responsive Layout** | Keyboard hints hidden on narrow viewport (800px), visible on wide viewport (1200px) |
+| Test group             | What's verified                                                                                           |
+| ---------------------- | --------------------------------------------------------------------------------------------------------- |
+| **Page Load**          | No JavaScript console errors, correct page title, header text                                             |
+| **URL Input**          | Input and Load button visible, invalid URL shows a toast notification                                     |
+| **Transport Controls** | Play/pause, stop, go-to-start, mute buttons visible; volume defaults to 100                               |
+| **Loop Region**        | Loop toggle checked by default, A/B/restart/reset buttons visible, time displays show 0:00                |
+| **Speed Control**      | Badge shows 1.00x, slider defaults to 1, clicking a preset updates the badge, moving slider updates badge |
+| **Metronome**          | BPM shows 120, +/- buttons increment/decrement, 4 beat dots visible, progressive tempo toggle works       |
+| **Playlist Sidebar**   | Auto-loads videos from `data/playlist.json`, items show titles, export/import buttons visible             |
+| **Keyboard Shortcuts** | Space key works, T key toggles metronome with toast, shortcuts are ignored when typing in the URL input   |
+| **Responsive Layout**  | Keyboard hints hidden on narrow viewport (800px), visible on wide viewport (1200px)                       |
 
 ### How to run
 
@@ -129,11 +129,11 @@ This runs unit tests first, then E2E tests. If unit tests fail, E2E tests will n
 
 ## When to Run Tests
 
-| Situation | Command |
-|---|---|
-| After changing any JS logic | `npm test` |
-| After changing UI / HTML / CSS | `npm run test:e2e` |
-| Before merging a branch | `npm run test:all` |
+| Situation                       | Command              |
+| ------------------------------- | -------------------- |
+| After changing any JS logic     | `npm test`           |
+| After changing UI / HTML / CSS  | `npm run test:e2e`   |
+| Before merging a branch         | `npm run test:all`   |
 | During development (continuous) | `npm run test:watch` |
 
 ---

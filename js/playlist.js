@@ -27,15 +27,17 @@ export function renderPlaylist() {
         return;
     }
 
-    dom.playlistContainer.innerHTML = list.map(item => {
-        const isActive = item.videoId === state.currentVideoId;
-        const thumbUrl = 'https://img.youtube.com/vi/' + item.videoId + '/mqdefault.jpg';
-        const speedText = (item.speed || 1).toFixed(2) + 'x';
-        const loopText = item.loopEnd > 0
-            ? formatTime(item.loopStart) + ' \u2192 ' + formatTime(item.loopEnd)
-            : 'Full';
+    dom.playlistContainer.innerHTML = list
+        .map(item => {
+            const isActive = item.videoId === state.currentVideoId;
+            const thumbUrl = 'https://img.youtube.com/vi/' + item.videoId + '/mqdefault.jpg';
+            const speedText = (item.speed || 1).toFixed(2) + 'x';
+            const loopText =
+                item.loopEnd > 0
+                    ? formatTime(item.loopStart) + ' \u2192 ' + formatTime(item.loopEnd)
+                    : 'Full';
 
-        return `
+            return `
             <div class="playlist-item ${isActive ? 'active' : ''}" data-id="${item.videoId}" draggable="true">
                 <div class="playlist-item-grip" title="Drag to reorder">\u2807</div>
                 <img class="playlist-item-thumb" src="${thumbUrl}" alt="" loading="lazy">
@@ -49,7 +51,8 @@ export function renderPlaylist() {
                 </div>
                 <button class="playlist-item-remove" data-remove="${item.videoId}" title="Remove">\u2715</button>
             </div>`;
-    }).join('');
+        })
+        .join('');
 
     initDragAndDrop();
 }
@@ -127,8 +130,9 @@ function onDragEnd() {
 }
 
 function saveDragOrder() {
-    const ids = Array.from(dom.playlistContainer.querySelectorAll('.playlist-item'))
-        .map(el => el.dataset.id);
+    const ids = Array.from(dom.playlistContainer.querySelectorAll('.playlist-item')).map(
+        el => el.dataset.id,
+    );
     const list = loadPlaylist();
     const reordered = ids.map(id => list.find(v => v.videoId === id)).filter(Boolean);
     const remaining = list.filter(v => !ids.includes(v.videoId));
@@ -153,10 +157,12 @@ export async function exportPlaylist() {
         try {
             const handle = await window.showSaveFilePicker({
                 suggestedName: 'playlist.json',
-                types: [{
-                    description: 'JSON File',
-                    accept: { 'application/json': ['.json'] },
-                }],
+                types: [
+                    {
+                        description: 'JSON File',
+                        accept: { 'application/json': ['.json'] },
+                    },
+                ],
             });
             const writable = await handle.createWritable();
             await writable.write(blob);

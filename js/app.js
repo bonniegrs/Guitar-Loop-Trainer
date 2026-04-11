@@ -9,14 +9,43 @@ import { dom } from './dom.js';
 import { showToast } from './toast.js';
 import { addToPlaylist, getPlaylistItem, debouncedSave } from './storage.js';
 import {
-    loadYouTubeAPI, createPlayer, stopMonitor,
-    extractVideoId, fetchVideoTitle,
-    togglePlayPause, stopVideo, goToBeginning, toggleMute, setVolume,
+    loadYouTubeAPI,
+    createPlayer,
+    stopMonitor,
+    extractVideoId,
+    fetchVideoTitle,
+    togglePlayPause,
+    stopVideo,
+    goToBeginning,
+    toggleMute,
+    setVolume,
 } from './player.js';
-import { updateLoopVisuals, setLoopStartToCurrent, setLoopEndToCurrent, resetLoop, restartLoop, onThumbMouseDown, onDocumentMouseMove, onDocumentMouseUp, onTrackClick } from './loop.js';
+import {
+    updateLoopVisuals,
+    setLoopStartToCurrent,
+    setLoopEndToCurrent,
+    resetLoop,
+    restartLoop,
+    onThumbMouseDown,
+    onDocumentMouseMove,
+    onDocumentMouseUp,
+    onTrackClick,
+} from './loop.js';
 import { updateSpeedDisplay, setSpeed } from './speed.js';
-import { toggleMetronome, setMetroBpm, tapTempo, restoreMetroSettings, progAdjust } from './metronome.js';
-import { renderPlaylist, removeFromPlaylist, exportPlaylist, importPlaylist, autoLoadFromFile } from './playlist.js';
+import {
+    toggleMetronome,
+    setMetroBpm,
+    tapTempo,
+    restoreMetroSettings,
+    progAdjust,
+} from './metronome.js';
+import {
+    renderPlaylist,
+    removeFromPlaylist,
+    exportPlaylist,
+    importPlaylist,
+    autoLoadFromFile,
+} from './playlist.js';
 import { handleShortcut } from './shortcuts.js';
 
 // ─── Video Loading (orchestrates player + playlist) ────
@@ -52,7 +81,7 @@ function restoreCurrentVideoSettings() {
     updateSpeedDisplay();
     if (state.playerReady && state.player) state.player.setPlaybackRate(state.currentSpeed);
 
-    const vol = (item.volume !== undefined) ? item.volume : parseInt(dom.volumeSlider.value);
+    const vol = item.volume !== undefined ? item.volume : parseInt(dom.volumeSlider.value);
     if (state.playerReady && state.player) state.player.setVolume(vol);
     dom.volumeSlider.value = vol;
     dom.volumeLabel.textContent = vol;
@@ -193,10 +222,16 @@ document.querySelectorAll('.prog-adj').forEach(btn => {
         debouncedSave();
     }
 
-    btn.addEventListener('mousedown', e => { e.preventDefault(); startHold(); });
+    btn.addEventListener('mousedown', e => {
+        e.preventDefault();
+        startHold();
+    });
     btn.addEventListener('mouseup', stopHold);
     btn.addEventListener('mouseleave', stopHold);
-    btn.addEventListener('touchstart', e => { e.preventDefault(); startHold(); });
+    btn.addEventListener('touchstart', e => {
+        e.preventDefault();
+        startHold();
+    });
     btn.addEventListener('touchend', stopHold);
 });
 

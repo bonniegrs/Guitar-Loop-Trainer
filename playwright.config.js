@@ -8,9 +8,7 @@ export default defineConfig({
         baseURL: 'http://localhost:3001',
         headless: true,
     },
-    projects: [
-        { name: 'chromium', use: { browserName: 'chromium' } },
-    ],
+    projects: [{ name: 'chromium', use: { browserName: 'chromium' } }],
     webServer: {
         command: 'npx serve -l 3001',
         port: 3001,

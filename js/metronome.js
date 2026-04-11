@@ -4,10 +4,20 @@
  */
 
 import {
-    BPM_MIN, BPM_MAX, METRO_SCHEDULE_AHEAD, METRO_LOOKAHEAD_MS,
-    METRO_ACCENT_FREQ, METRO_NORMAL_FREQ, METRO_ACCENT_GAIN, METRO_NORMAL_GAIN,
-    METRO_NOTE_DURATION, BEATS_PER_BAR,
-    PROG_DEFAULT_START, PROG_DEFAULT_END, PROG_DEFAULT_STEP, PROG_DEFAULT_BARS,
+    BPM_MIN,
+    BPM_MAX,
+    METRO_SCHEDULE_AHEAD,
+    METRO_LOOKAHEAD_MS,
+    METRO_ACCENT_FREQ,
+    METRO_NORMAL_FREQ,
+    METRO_ACCENT_GAIN,
+    METRO_NORMAL_GAIN,
+    METRO_NOTE_DURATION,
+    BEATS_PER_BAR,
+    PROG_DEFAULT_START,
+    PROG_DEFAULT_END,
+    PROG_DEFAULT_STEP,
+    PROG_DEFAULT_BARS,
 } from './config.js';
 import { state } from './state.js';
 import { dom } from './dom.js';
@@ -30,7 +40,9 @@ function metroClick(time, accent) {
 }
 
 function flashDot(idx) {
-    dom.metroDots.forEach(d => { d.classList.remove('flash', 'flash-down'); });
+    dom.metroDots.forEach(d => {
+        d.classList.remove('flash', 'flash-down');
+    });
     if (dom.metroDots[idx]) {
         dom.metroDots[idx].classList.add(idx === 0 ? 'flash' : 'flash-down');
     }
@@ -43,7 +55,10 @@ function metroScheduler() {
         metroClick(state.metroNextNoteTime, accent);
 
         const beatIdx = state.metroBeatCount % BEATS_PER_BAR;
-        const delay = Math.max(0, (state.metroNextNoteTime - state.metroAudioCtx.currentTime) * 1000);
+        const delay = Math.max(
+            0,
+            (state.metroNextNoteTime - state.metroAudioCtx.currentTime) * 1000,
+        );
         const id = setTimeout(() => {
             if (!state.metroPlaying) return;
             flashDot(beatIdx);
@@ -159,7 +174,9 @@ export function stopMetronome() {
     dom.metroToggleBtn.classList.remove('active');
     dom.metroIconPlay.style.display = '';
     dom.metroIconStop.style.display = 'none';
-    dom.metroDots.forEach(d => { d.classList.remove('flash', 'flash-down'); });
+    dom.metroDots.forEach(d => {
+        d.classList.remove('flash', 'flash-down');
+    });
     dom.progProgressRow.style.display = 'none';
 }
 

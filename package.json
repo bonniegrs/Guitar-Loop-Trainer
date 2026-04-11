@@ -1,28 +1,37 @@
 {
-  "name": "guitar-loop-trainer",
-  "version": "1.0.0",
-  "private": true,
-  "description": "Video Loop & Speed Trainer for guitar practice.",
-  "license": "MIT",
-  "author": "bonniegrs",
-  "homepage": "https://bonniegrs.github.io/Guitar-Loop-Trainer/",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/bonniegrs/Guitar-Loop-Trainer.git"
-  },
-  "engines": {
-    "node": ">=18"
-  },
-  "scripts": {
-    "start": "npx serve -l 3000",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:e2e": "playwright test",
-    "test:all": "vitest run && playwright test"
-  },
-  "devDependencies": {
-    "@playwright/test": "^1.59.1",
-    "jsdom": "^29.0.2",
-    "vitest": "^4.1.4"
-  }
+    "name": "guitar-loop-trainer",
+    "version": "1.0.0",
+    "private": true,
+    "description": "Video Loop & Speed Trainer for guitar practice.",
+    "license": "MIT",
+    "author": "bonniegrs",
+    "homepage": "https://bonniegrs.github.io/Guitar-Loop-Trainer/",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/bonniegrs/Guitar-Loop-Trainer.git"
+    },
+    "type": "module",
+    "engines": {
+        "node": ">=18"
+    },
+    "scripts": {
+        "start": "npx serve -l 3000",
+        "test": "vitest run",
+        "test:watch": "vitest",
+        "test:e2e": "playwright test",
+        "test:all": "vitest run && playwright test",
+        "lint": "eslint js/ tests/ e2e/",
+        "lint:fix": "eslint js/ tests/ e2e/ --fix",
+        "format": "prettier --write .",
+        "format:check": "prettier --check ."
+    },
+    "devDependencies": {
+        "@eslint/js": "^10.0.1",
+        "@playwright/test": "^1.59.1",
+        "eslint": "^10.2.0",
+        "eslint-config-prettier": "^10.1.8",
+        "jsdom": "^29.0.2",
+        "prettier": "^3.8.2",
+        "vitest": "^4.1.4"
+    }
 }

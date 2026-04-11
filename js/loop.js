@@ -17,7 +17,7 @@ export function updateLoopVisuals() {
     const end = Math.max(state.loopStartPercent, state.loopEndPercent);
 
     dom.loopRegion.style.left = start + '%';
-    dom.loopRegion.style.width = (end - start) + '%';
+    dom.loopRegion.style.width = end - start + '%';
 
     dom.thumbStart.style.left = start + '%';
     dom.thumbEnd.style.left = end + '%';

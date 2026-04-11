@@ -2,6 +2,7 @@
 
 **Video Loop & Speed Trainer** — A web app for practicing guitar (or any instrument) along with online videos. Set A/B loop regions, slow down playback, use a built-in metronome with progressive tempo, and manage a playlist of practice sessions — all from your browser.
 
+[![CI](https://github.com/bonniegrs/Guitar-Loop-Trainer/actions/workflows/ci.yml/badge.svg)](https://github.com/bonniegrs/Guitar-Loop-Trainer/actions/workflows/ci.yml)
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
@@ -12,9 +13,11 @@
 ---
 
 ### Video Player, Loop Region & Playlist
+
 ![Video Player](screenshots/video-player.png)
 
 ### Metronome & Progressive Tempo
+
 ![Metronome](screenshots/metronome.png)
 
 ---
@@ -22,11 +25,13 @@
 ## Features
 
 ### Video Playback
+
 - Load any video by pasting a URL or video ID
 - Automatic fallback for embed-restricted videos
 - Full transport controls: play/pause, stop, seek to beginning
 
 ### A/B Looping
+
 - Set loop start (A) and end (B) points from the current playback position
 - Drag loop boundaries directly on the visual timeline
 - Click anywhere on the timeline to seek
@@ -34,11 +39,13 @@
 - Loop settings are saved and restored automatically
 
 ### Speed Control
+
 - Adjust playback speed from **0.25x** to **2.0x** in **0.05** increments
 - Quick-access preset buttons for common speeds
 - Live speed badge indicator
 
 ### Metronome
+
 - Web Audio-based click track with accented downbeat (4/4 time)
 - BPM range: 30–300
 - **Tap tempo** — tap a button to detect BPM from your rhythm
@@ -46,12 +53,14 @@
 - Independent volume control
 
 ### Progressive Tempo
+
 - Set a start BPM, end BPM, step size, and number of bars
 - The metronome automatically increases tempo after each set of bars
 - Visual progress bar and toast notifications on tempo changes
 - Great for gradually building up speed on difficult passages
 
 ### Playlist & Session Management
+
 - Recent videos sidebar with thumbnails and metadata
 - Per-video persistence of loop points, speed, volume, BPM, and metronome settings
 - Drag-and-drop reordering
@@ -62,19 +71,19 @@
 
 ### Keyboard Shortcuts
 
-| Key | Action |
-|-----|--------|
-| `Space` | Play / Pause |
-| `[` | Set loop start (A) |
-| `]` | Set loop end (B) |
-| `R` | Restart from loop start |
-| `L` | Toggle loop on/off |
-| `-` | Decrease speed |
-| `+` / `=` | Increase speed |
-| `↑` / `↓` | Volume up / down |
-| `M` | Mute / Unmute |
-| `T` | Toggle metronome |
-| `Home` | Seek to beginning of video |
+| Key       | Action                     |
+| --------- | -------------------------- |
+| `Space`   | Play / Pause               |
+| `[`       | Set loop start (A)         |
+| `]`       | Set loop end (B)           |
+| `R`       | Restart from loop start    |
+| `L`       | Toggle loop on/off         |
+| `-`       | Decrease speed             |
+| `+` / `=` | Increase speed             |
+| `↑` / `↓` | Volume up / down           |
+| `M`       | Mute / Unmute              |
+| `T`       | Toggle metronome           |
+| `Home`    | Seek to beginning of video |
 
 ---
 
@@ -143,11 +152,15 @@ Guitar-Loop-Trainer/
 ├── tests/                # Unit tests (Vitest)
 ├── e2e/                  # End-to-end tests (Playwright)
 ├── screenshots/          # README screenshots
+├── .github/workflows/    # GitHub Actions CI pipeline
 ├── package.json          # Dev dependencies and scripts
+├── eslint.config.js      # ESLint configuration
+├── .prettierrc           # Prettier configuration
 ├── vitest.config.js      # Unit test configuration
 ├── playwright.config.js  # E2E test configuration
 ├── .editorconfig         # Editor formatting rules
 ├── .gitignore
+├── CONTRIBUTING.md       # Contributor guidelines
 ├── LICENSE               # MIT License
 └── README.md
 ```
@@ -158,15 +171,15 @@ No build step, no bundler, no framework — vanilla ES modules loaded natively b
 
 ## Tech Stack
 
-| Layer | Technology |
-|-------|------------|
-| UI | Vanilla HTML5 / CSS3 / JavaScript |
-| Video | IFrame Player API (embedded video playback) |
-| Audio | [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) (metronome) |
-| Metadata | [noembed.com](https://noembed.com) (video title resolution) |
-| Fonts | [Inter](https://fonts.google.com/specimen/Inter) via Google Fonts |
-| Persistence | `localStorage` |
-| Testing | [Vitest](https://vitest.dev/) + [Playwright](https://playwright.dev/) |
+| Layer       | Technology                                                                                  |
+| ----------- | ------------------------------------------------------------------------------------------- |
+| UI          | Vanilla HTML5 / CSS3 / JavaScript                                                           |
+| Video       | IFrame Player API (embedded video playback)                                                 |
+| Audio       | [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) (metronome) |
+| Metadata    | [noembed.com](https://noembed.com) (video title resolution)                                 |
+| Fonts       | [Inter](https://fonts.google.com/specimen/Inter) via Google Fonts                           |
+| Persistence | `localStorage`                                                                              |
+| Testing     | [Vitest](https://vitest.dev/) + [Playwright](https://playwright.dev/)                       |
 
 ---
 
@@ -197,6 +210,12 @@ npm run test:all
 ```
 
 For the full testing guide (debugging, watch mode, adding new tests), see [TESTING.md](docs/TESTING.md).
+
+---
+
+## Contributing
+
+Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ---
 

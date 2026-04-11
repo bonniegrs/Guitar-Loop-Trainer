@@ -1,331 +1,690 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Practice guitar with video loops, adjustable speed, and a built-in metronome with progressive tempo.">
-    <meta property="og:title" content="Guitar Loop Trainer">
-    <meta property="og:description" content="Video loop & speed trainer for guitar practice.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://bonniegrs.github.io/Guitar-Loop-Trainer/">
-    <meta property="og:image" content="https://bonniegrs.github.io/Guitar-Loop-Trainer/screenshots/video-player.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <title>Guitar Loop Trainer</title>
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div class="app">
-        <header class="app-header">
-            <div class="logo">
-                <svg class="logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M20 4C15 4 11 8 11 13C11 16 12.5 18.5 14 20C15 21 16 22.5 16 24V32C16 34.2 17.8 36 20 36C22.2 36 24 34.2 24 32V24C24 22.5 25 21 26 20C27.5 18.5 29 16 29 13C29 8 25 4 20 4Z" fill="url(#grad1)" stroke="#d4912a" stroke-width="1.5"/>
-                    <circle cx="20" cy="13" r="3" fill="#0d0d14" stroke="#d4912a" stroke-width="1"/>
-                    <line x1="20" y1="16" x2="20" y2="32" stroke="#d4912a" stroke-width="1.5"/>
-                    <line x1="17" y1="26" x2="23" y2="26" stroke="#d4912a" stroke-width="1" opacity="0.6"/>
-                    <line x1="17" y1="29" x2="23" y2="29" stroke="#d4912a" stroke-width="1" opacity="0.6"/>
-                    <defs>
-                        <linearGradient id="grad1" x1="11" y1="4" x2="29" y2="36">
-                            <stop offset="0%" stop-color="#2a1f0a"/>
-                            <stop offset="100%" stop-color="#1a1428"/>
-                        </linearGradient>
-                    </defs>
-                </svg>
-                <div class="logo-text">
-                    <h1>Guitar Loop Trainer</h1>
-                    <span class="logo-subtitle">Video Loop & Speed Trainer</span>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="description"
+            content="Practice guitar with video loops, adjustable speed, and a built-in metronome with progressive tempo."
+        />
+        <meta property="og:title" content="Guitar Loop Trainer" />
+        <meta property="og:description" content="Video loop & speed trainer for guitar practice." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://bonniegrs.github.io/Guitar-Loop-Trainer/" />
+        <meta
+            property="og:image"
+            content="https://bonniegrs.github.io/Guitar-Loop-Trainer/screenshots/video-player.png"
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+        <title>Guitar Loop Trainer</title>
+        <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <div class="app">
+            <header class="app-header">
+                <div class="logo">
+                    <svg
+                        class="logo-icon"
+                        viewBox="0 0 40 40"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M20 4C15 4 11 8 11 13C11 16 12.5 18.5 14 20C15 21 16 22.5 16 24V32C16 34.2 17.8 36 20 36C22.2 36 24 34.2 24 32V24C24 22.5 25 21 26 20C27.5 18.5 29 16 29 13C29 8 25 4 20 4Z"
+                            fill="url(#grad1)"
+                            stroke="#d4912a"
+                            stroke-width="1.5"
+                        />
+                        <circle
+                            cx="20"
+                            cy="13"
+                            r="3"
+                            fill="#0d0d14"
+                            stroke="#d4912a"
+                            stroke-width="1"
+                        />
+                        <line x1="20" y1="16" x2="20" y2="32" stroke="#d4912a" stroke-width="1.5" />
+                        <line
+                            x1="17"
+                            y1="26"
+                            x2="23"
+                            y2="26"
+                            stroke="#d4912a"
+                            stroke-width="1"
+                            opacity="0.6"
+                        />
+                        <line
+                            x1="17"
+                            y1="29"
+                            x2="23"
+                            y2="29"
+                            stroke="#d4912a"
+                            stroke-width="1"
+                            opacity="0.6"
+                        />
+                        <defs>
+                            <linearGradient id="grad1" x1="11" y1="4" x2="29" y2="36">
+                                <stop offset="0%" stop-color="#2a1f0a" />
+                                <stop offset="100%" stop-color="#1a1428" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <div class="logo-text">
+                        <h1>Guitar Loop Trainer</h1>
+                        <span class="logo-subtitle">Video Loop & Speed Trainer</span>
+                    </div>
                 </div>
-            </div>
-            <div class="header-eq" id="headerEq">
-                <span></span><span></span><span></span><span></span><span></span>
-            </div>
-        </header>
-
-        <div class="url-bar">
-            <div class="url-input-wrapper">
-                <svg class="url-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19.13C5.12 19.56 12 19.56 12 19.56s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/>
-                    <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor"/>
-                </svg>
-                <input type="text" id="urlInput" placeholder="Paste a video URL and press Enter or click Load..." spellcheck="false" autocomplete="off">
-            </div>
-            <button id="loadBtn" class="btn-primary">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18">
-                    <polygon points="5 3 19 12 5 21 5 3" fill="currentColor"/>
-                </svg>
-                Load
-            </button>
-        </div>
-
-        <main class="main-content">
-            <section class="player-section">
-                <div class="keyboard-hints">
-                    <span><kbd>Space</kbd> Play / Pause</span>
-                    <span><kbd>[</kbd> Set A</span>
-                    <span><kbd>]</kbd> Set B</span>
-                    <span><kbd>R</kbd> Restart</span>
-                    <span><kbd>L</kbd> Loop</span>
-                    <span><kbd>-</kbd> <kbd>+</kbd> Speed</span>
-                    <span><kbd>↑</kbd> <kbd>↓</kbd> Volume</span>
-                    <span><kbd>M</kbd> Mute</span>
-                    <span><kbd>T</kbd> Metronome</span>
-                    <span><kbd>Home</kbd> Beginning</span>
+                <div class="header-eq" id="headerEq">
+                    <span></span><span></span><span></span><span></span><span></span>
                 </div>
-                <div class="player-wrapper">
-                    <div id="playerOverlay" class="player-overlay"></div>
-                    <div id="player" class="player-placeholder">
-                        <div class="placeholder-content">
-                            <svg viewBox="0 0 80 80" fill="none" width="80" height="80">
-                                <circle cx="40" cy="40" r="38" stroke="#2a2a3e" stroke-width="2" fill="none"/>
-                                <polygon points="32 24 60 40 32 56" fill="#2a2a3e"/>
+            </header>
+
+            <div class="url-bar">
+                <div class="url-input-wrapper">
+                    <svg
+                        class="url-icon"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    >
+                        <path
+                            d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19.13C5.12 19.56 12 19.56 12 19.56s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"
+                        />
+                        <polygon
+                            points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"
+                            fill="currentColor"
+                        />
+                    </svg>
+                    <input
+                        type="text"
+                        id="urlInput"
+                        placeholder="Paste a video URL and press Enter or click Load..."
+                        spellcheck="false"
+                        autocomplete="off"
+                    />
+                </div>
+                <button id="loadBtn" class="btn-primary">
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        width="18"
+                        height="18"
+                    >
+                        <polygon points="5 3 19 12 5 21 5 3" fill="currentColor" />
+                    </svg>
+                    Load
+                </button>
+            </div>
+
+            <main class="main-content">
+                <section class="player-section">
+                    <div class="keyboard-hints">
+                        <span><kbd>Space</kbd> Play / Pause</span>
+                        <span><kbd>[</kbd> Set A</span>
+                        <span><kbd>]</kbd> Set B</span>
+                        <span><kbd>R</kbd> Restart</span>
+                        <span><kbd>L</kbd> Loop</span>
+                        <span><kbd>-</kbd> <kbd>+</kbd> Speed</span>
+                        <span><kbd>↑</kbd> <kbd>↓</kbd> Volume</span>
+                        <span><kbd>M</kbd> Mute</span>
+                        <span><kbd>T</kbd> Metronome</span>
+                        <span><kbd>Home</kbd> Beginning</span>
+                    </div>
+                    <div class="player-wrapper">
+                        <div id="playerOverlay" class="player-overlay"></div>
+                        <div id="player" class="player-placeholder">
+                            <div class="placeholder-content">
+                                <svg viewBox="0 0 80 80" fill="none" width="80" height="80">
+                                    <circle
+                                        cx="40"
+                                        cy="40"
+                                        r="38"
+                                        stroke="#2a2a3e"
+                                        stroke-width="2"
+                                        fill="none"
+                                    />
+                                    <polygon points="32 24 60 40 32 56" fill="#2a2a3e" />
+                                </svg>
+                                <p>Paste a video URL above to start practicing</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="transport-controls" id="transportControls">
+                        <button
+                            id="playPauseBtn"
+                            class="transport-btn"
+                            title="Play / Pause"
+                            aria-label="Play or pause"
+                        >
+                            <svg
+                                id="iconPlay"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                width="20"
+                                height="20"
+                            >
+                                <polygon points="5 3 19 12 5 21 5 3" />
                             </svg>
-                            <p>Paste a video URL above to start practicing</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="transport-controls" id="transportControls">
-                    <button id="playPauseBtn" class="transport-btn" title="Play / Pause" aria-label="Play or pause">
-                        <svg id="iconPlay" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-                            <polygon points="5 3 19 12 5 21 5 3"/>
-                        </svg>
-                        <svg id="iconPause" viewBox="0 0 24 24" fill="currentColor" width="20" height="20" style="display:none">
-                            <rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/>
-                        </svg>
-                    </button>
-                    <button id="stopBtn" class="transport-btn transport-sm" title="Stop" aria-label="Stop">
-                        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
-                            <rect x="4" y="4" width="16" height="16" rx="2"/>
-                        </svg>
-                    </button>
-                    <button id="goToStartBtn" class="transport-btn transport-sm" title="Go to beginning of video [ hotkey: Home ]" aria-label="Go to beginning">
-                        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
-                            <rect x="3" y="5" width="3" height="14" rx="1"/>
-                            <polygon points="20 5 9 12 20 19 20 5"/>
-                        </svg>
-                    </button>
-                    <div class="transport-divider"></div>
-                    <button id="muteBtn" class="transport-btn transport-sm" title="Mute / Unmute" aria-label="Mute or unmute">
-                        <svg id="iconVol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
-                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor"/>
-                            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
-                            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
-                        </svg>
-                        <svg id="iconMuted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" style="display:none">
-                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor"/>
-                            <line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>
-                        </svg>
-                    </button>
-                    <input type="range" id="volumeSlider" class="volume-slider" min="0" max="100" step="1" value="100" title="Volume">
-                    <span id="volumeLabel" class="volume-label">100</span>
-                </div>
-
-                <div class="controls-panel">
-                    <div class="control-group loop-control">
-                        <div class="control-header">
-                            <div class="control-title">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
-                                    <polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/>
-                                    <polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/>
-                                </svg>
-                                <h3>Loop Region</h3>
-                            </div>
-                            <div class="control-actions">
-                                <button id="setStartBtn" class="btn-sm" title="Set loop start to current time [ hotkey: [ ]">A ◄</button>
-                                <button id="setEndBtn" class="btn-sm" title="Set loop end to current time [ hotkey: ] ]">► B</button>
-                                <button id="restartLoopBtn" class="btn-sm btn-accent" title="Jump to loop start and play [ hotkey: R ]">↺ Restart</button>
-                                <button id="resetLoopBtn" class="btn-sm btn-ghost" title="Reset loop to full video">Reset</button>
-                                <label class="toggle" title="Toggle loop on/off [ hotkey: L ]">
-                                    <input type="checkbox" id="loopToggle" checked>
-                                    <span class="toggle-track"><span class="toggle-thumb"></span></span>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="loop-timeline" id="loopTimeline">
-                            <div class="loop-track" id="loopTrack">
-                                <div class="loop-region" id="loopRegion"></div>
-                                <div class="loop-playhead" id="playhead"></div>
-                                <div class="loop-thumb thumb-start" id="thumbStart" title="Drag to set loop start">
-                                    <span class="thumb-label" id="startTimeLabel">0:00</span>
-                                </div>
-                                <div class="loop-thumb thumb-end" id="thumbEnd" title="Drag to set loop end">
-                                    <span class="thumb-label" id="endTimeLabel">0:00</span>
-                                </div>
-                            </div>
-                            <div class="loop-time-display">
-                                <span id="currentTimeDisplay">0:00</span>
-                                <span class="time-separator">/</span>
-                                <span id="durationDisplay">0:00</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="control-group speed-control">
-                        <div class="control-header">
-                            <div class="control-title">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
-                                    <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-                                </svg>
-                                <h3>Playback Speed</h3>
-                            </div>
-                            <span id="speedValue" class="speed-badge">1.0x</span>
-                        </div>
-                        <div class="speed-slider-wrapper">
-                            <input type="range" id="speedSlider" class="speed-slider" min="0.25" max="2" step="0.05" value="1">
-                            <div class="speed-labels">
-                                <span data-value="0.25">0.25</span>
-                                <span data-value="0.5">0.5</span>
-                                <span data-value="0.75">0.75</span>
-                                <span data-value="1" class="active">1x</span>
-                                <span data-value="1.25">1.25</span>
-                                <span data-value="1.5">1.5</span>
-                                <span data-value="1.75">1.75</span>
-                                <span data-value="2">2x</span>
-                            </div>
-                        </div>
+                            <svg
+                                id="iconPause"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                width="20"
+                                height="20"
+                                style="display: none"
+                            >
+                                <rect x="5" y="3" width="4" height="18" />
+                                <rect x="15" y="3" width="4" height="18" />
+                            </svg>
+                        </button>
+                        <button
+                            id="stopBtn"
+                            class="transport-btn transport-sm"
+                            title="Stop"
+                            aria-label="Stop"
+                        >
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                                <rect x="4" y="4" width="16" height="16" rx="2" />
+                            </svg>
+                        </button>
+                        <button
+                            id="goToStartBtn"
+                            class="transport-btn transport-sm"
+                            title="Go to beginning of video [ hotkey: Home ]"
+                            aria-label="Go to beginning"
+                        >
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                                <rect x="3" y="5" width="3" height="14" rx="1" />
+                                <polygon points="20 5 9 12 20 19 20 5" />
+                            </svg>
+                        </button>
+                        <div class="transport-divider"></div>
+                        <button
+                            id="muteBtn"
+                            class="transport-btn transport-sm"
+                            title="Mute / Unmute"
+                            aria-label="Mute or unmute"
+                        >
+                            <svg
+                                id="iconVol"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                width="18"
+                                height="18"
+                            >
+                                <polygon
+                                    points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"
+                                    fill="currentColor"
+                                />
+                                <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                                <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+                            </svg>
+                            <svg
+                                id="iconMuted"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                width="18"
+                                height="18"
+                                style="display: none"
+                            >
+                                <polygon
+                                    points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"
+                                    fill="currentColor"
+                                />
+                                <line x1="23" y1="9" x2="17" y2="15" />
+                                <line x1="17" y1="9" x2="23" y2="15" />
+                            </svg>
+                        </button>
+                        <input
+                            type="range"
+                            id="volumeSlider"
+                            class="volume-slider"
+                            min="0"
+                            max="100"
+                            step="1"
+                            value="100"
+                            title="Volume"
+                        />
+                        <span id="volumeLabel" class="volume-label">100</span>
                     </div>
 
-                    <div class="control-group metronome-control">
-                        <div class="metro-top">
-                            <div class="metro-bpm-display">
-                                <span id="metroBpmValue" class="metro-bpm-number">120</span>
-                                <span class="metro-bpm-label">BPM</span>
-                            </div>
-                            <div class="metro-actions">
-                                <button id="tapTempoBtn" class="btn-sm" title="Tap rhythmically to detect BPM">Tap Tempo</button>
-                                <button id="metroToggleBtn" class="metro-play-btn" title="Start / Stop metronome [ hotkey: T ]">
-                                    <svg id="metroIconPlay" viewBox="0 0 24 24" fill="currentColor" width="22" height="22">
-                                        <polygon points="6 3 20 12 6 21 6 3"/>
+                    <div class="controls-panel">
+                        <div class="control-group loop-control">
+                            <div class="control-header">
+                                <div class="control-title">
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        width="18"
+                                        height="18"
+                                    >
+                                        <polyline points="17 1 21 5 17 9" />
+                                        <path d="M3 11V9a4 4 0 0 1 4-4h14" />
+                                        <polyline points="7 23 3 19 7 15" />
+                                        <path d="M21 13v2a4 4 0 0 1-4 4H3" />
                                     </svg>
-                                    <svg id="metroIconStop" viewBox="0 0 24 24" fill="currentColor" width="20" height="20" style="display:none">
-                                        <rect x="4" y="4" width="16" height="16" rx="2"/>
+                                    <h3>Loop Region</h3>
+                                </div>
+                                <div class="control-actions">
+                                    <button
+                                        id="setStartBtn"
+                                        class="btn-sm"
+                                        title="Set loop start to current time [ hotkey: [ ]"
+                                    >
+                                        A ◄
+                                    </button>
+                                    <button
+                                        id="setEndBtn"
+                                        class="btn-sm"
+                                        title="Set loop end to current time [ hotkey: ] ]"
+                                    >
+                                        ► B
+                                    </button>
+                                    <button
+                                        id="restartLoopBtn"
+                                        class="btn-sm btn-accent"
+                                        title="Jump to loop start and play [ hotkey: R ]"
+                                    >
+                                        ↺ Restart
+                                    </button>
+                                    <button
+                                        id="resetLoopBtn"
+                                        class="btn-sm btn-ghost"
+                                        title="Reset loop to full video"
+                                    >
+                                        Reset
+                                    </button>
+                                    <label class="toggle" title="Toggle loop on/off [ hotkey: L ]">
+                                        <input type="checkbox" id="loopToggle" checked />
+                                        <span class="toggle-track"
+                                            ><span class="toggle-thumb"></span
+                                        ></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="loop-timeline" id="loopTimeline">
+                                <div class="loop-track" id="loopTrack">
+                                    <div class="loop-region" id="loopRegion"></div>
+                                    <div class="loop-playhead" id="playhead"></div>
+                                    <div
+                                        class="loop-thumb thumb-start"
+                                        id="thumbStart"
+                                        title="Drag to set loop start"
+                                    >
+                                        <span class="thumb-label" id="startTimeLabel">0:00</span>
+                                    </div>
+                                    <div
+                                        class="loop-thumb thumb-end"
+                                        id="thumbEnd"
+                                        title="Drag to set loop end"
+                                    >
+                                        <span class="thumb-label" id="endTimeLabel">0:00</span>
+                                    </div>
+                                </div>
+                                <div class="loop-time-display">
+                                    <span id="currentTimeDisplay">0:00</span>
+                                    <span class="time-separator">/</span>
+                                    <span id="durationDisplay">0:00</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="control-group speed-control">
+                            <div class="control-header">
+                                <div class="control-title">
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        width="18"
+                                        height="18"
+                                    >
+                                        <circle cx="12" cy="12" r="10" />
+                                        <polyline points="12 6 12 12 16 14" />
                                     </svg>
+                                    <h3>Playback Speed</h3>
+                                </div>
+                                <span id="speedValue" class="speed-badge">1.0x</span>
+                            </div>
+                            <div class="speed-slider-wrapper">
+                                <input
+                                    type="range"
+                                    id="speedSlider"
+                                    class="speed-slider"
+                                    min="0.25"
+                                    max="2"
+                                    step="0.05"
+                                    value="1"
+                                />
+                                <div class="speed-labels">
+                                    <span data-value="0.25">0.25</span>
+                                    <span data-value="0.5">0.5</span>
+                                    <span data-value="0.75">0.75</span>
+                                    <span data-value="1" class="active">1x</span>
+                                    <span data-value="1.25">1.25</span>
+                                    <span data-value="1.5">1.5</span>
+                                    <span data-value="1.75">1.75</span>
+                                    <span data-value="2">2x</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="control-group metronome-control">
+                            <div class="metro-top">
+                                <div class="metro-bpm-display">
+                                    <span id="metroBpmValue" class="metro-bpm-number">120</span>
+                                    <span class="metro-bpm-label">BPM</span>
+                                </div>
+                                <div class="metro-actions">
+                                    <button
+                                        id="tapTempoBtn"
+                                        class="btn-sm"
+                                        title="Tap rhythmically to detect BPM"
+                                    >
+                                        Tap Tempo
+                                    </button>
+                                    <button
+                                        id="metroToggleBtn"
+                                        class="metro-play-btn"
+                                        title="Start / Stop metronome [ hotkey: T ]"
+                                    >
+                                        <svg
+                                            id="metroIconPlay"
+                                            viewBox="0 0 24 24"
+                                            fill="currentColor"
+                                            width="22"
+                                            height="22"
+                                        >
+                                            <polygon points="6 3 20 12 6 21 6 3" />
+                                        </svg>
+                                        <svg
+                                            id="metroIconStop"
+                                            viewBox="0 0 24 24"
+                                            fill="currentColor"
+                                            width="20"
+                                            height="20"
+                                            style="display: none"
+                                        >
+                                            <rect x="4" y="4" width="16" height="16" rx="2" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="metro-slider-row">
+                                <button id="bpmMinusBtn" class="metro-adj-btn" title="BPM -1">
+                                    −
+                                </button>
+                                <input
+                                    type="range"
+                                    id="bpmSlider"
+                                    class="metro-slider"
+                                    min="30"
+                                    max="300"
+                                    step="1"
+                                    value="120"
+                                />
+                                <button id="bpmPlusBtn" class="metro-adj-btn" title="BPM +1">
+                                    +
                                 </button>
                             </div>
+                            <div class="metro-vol-row">
+                                <button
+                                    id="metroMuteBtn"
+                                    class="transport-btn transport-sm"
+                                    title="Mute / Unmute metronome"
+                                >
+                                    <svg
+                                        id="metroVolIcon"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        width="18"
+                                        height="18"
+                                    >
+                                        <polygon
+                                            points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"
+                                            fill="currentColor"
+                                        />
+                                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+                                    </svg>
+                                    <svg
+                                        id="metroMutedIcon"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        width="18"
+                                        height="18"
+                                        style="display: none"
+                                    >
+                                        <polygon
+                                            points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"
+                                            fill="currentColor"
+                                        />
+                                        <line x1="23" y1="9" x2="17" y2="15" />
+                                        <line x1="17" y1="9" x2="23" y2="15" />
+                                    </svg>
+                                </button>
+                                <input
+                                    type="range"
+                                    id="metroVolSlider"
+                                    class="volume-slider"
+                                    min="0"
+                                    max="100"
+                                    step="1"
+                                    value="50"
+                                    title="Metronome volume"
+                                />
+                                <span id="metroVolLabel" class="volume-label">50</span>
+                            </div>
+                            <div class="metro-beat-dots" id="metroBeatDots">
+                                <span class="metro-dot"></span>
+                                <span class="metro-dot"></span>
+                                <span class="metro-dot"></span>
+                                <span class="metro-dot"></span>
+                            </div>
+
+                            <div class="prog-tempo">
+                                <div class="prog-tempo-header">
+                                    <div class="control-title">
+                                        <svg
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            width="16"
+                                            height="16"
+                                        >
+                                            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                                            <polyline points="17 6 23 6 23 12" />
+                                        </svg>
+                                        <h3>Progressive Tempo</h3>
+                                    </div>
+                                    <label class="toggle" title="Enable progressive tempo ramp">
+                                        <input type="checkbox" id="progToggle" />
+                                        <span class="toggle-track"
+                                            ><span class="toggle-thumb"></span
+                                        ></span>
+                                    </label>
+                                </div>
+                                <div class="prog-tempo-body" id="progBody">
+                                    <div class="prog-row prog-bpm-row">
+                                        <div class="prog-bpm-group">
+                                            <span class="prog-bpm-tag">START</span>
+                                            <button
+                                                class="prog-adj"
+                                                data-target="progStartBpm"
+                                                data-dir="-1"
+                                            >
+                                                −
+                                            </button>
+                                            <span
+                                                id="progStartBpm"
+                                                class="prog-bpm-val"
+                                                data-value="85"
+                                                >85</span
+                                            >
+                                            <button
+                                                class="prog-adj"
+                                                data-target="progStartBpm"
+                                                data-dir="1"
+                                            >
+                                                +
+                                            </button>
+                                        </div>
+                                        <svg
+                                            class="prog-arrow"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2.5"
+                                            width="20"
+                                            height="20"
+                                        >
+                                            <line x1="5" y1="12" x2="19" y2="12" />
+                                            <polyline points="12 5 19 12 12 19" />
+                                        </svg>
+                                        <div class="prog-bpm-group">
+                                            <span class="prog-bpm-tag">END</span>
+                                            <button
+                                                class="prog-adj"
+                                                data-target="progEndBpm"
+                                                data-dir="-1"
+                                            >
+                                                −
+                                            </button>
+                                            <span
+                                                id="progEndBpm"
+                                                class="prog-bpm-val"
+                                                data-value="110"
+                                                >110</span
+                                            >
+                                            <button
+                                                class="prog-adj"
+                                                data-target="progEndBpm"
+                                                data-dir="1"
+                                            >
+                                                +
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="prog-row">
+                                        <label class="prog-label">Step</label>
+                                        <select id="progStep" class="prog-select">
+                                            <option value="1">1 BPM</option>
+                                            <option value="2">2 BPM</option>
+                                            <option value="3">3 BPM</option>
+                                            <option value="5" selected>5 BPM</option>
+                                            <option value="10">10 BPM</option>
+                                        </select>
+                                        <label class="prog-label">Bars</label>
+                                        <select id="progBars" class="prog-select">
+                                            <option value="2">2</option>
+                                            <option value="4" selected>4</option>
+                                            <option value="8">8</option>
+                                            <option value="16">16</option>
+                                        </select>
+                                    </div>
+                                    <div
+                                        class="prog-progress-row"
+                                        id="progProgressRow"
+                                        style="display: none"
+                                    >
+                                        <div class="prog-progress-bar">
+                                            <div class="prog-progress-fill" id="progFill"></div>
+                                        </div>
+                                        <span class="prog-progress-text" id="progText"
+                                            >85 → 110</span
+                                        >
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="metro-slider-row">
-                            <button id="bpmMinusBtn" class="metro-adj-btn" title="BPM -1">−</button>
-                            <input type="range" id="bpmSlider" class="metro-slider" min="30" max="300" step="1" value="120">
-                            <button id="bpmPlusBtn" class="metro-adj-btn" title="BPM +1">+</button>
-                        </div>
-                        <div class="metro-vol-row">
-                            <button id="metroMuteBtn" class="transport-btn transport-sm" title="Mute / Unmute metronome">
-                                <svg id="metroVolIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
-                                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor"/>
-                                    <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
-                                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
-                                </svg>
-                                <svg id="metroMutedIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" style="display:none">
-                                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor"/>
-                                    <line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>
-                                </svg>
+                    </div>
+                </section>
+
+                <aside class="playlist-section">
+                    <div class="playlist-header">
+                        <h3>
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                width="18"
+                                height="18"
+                            >
+                                <line x1="8" y1="6" x2="21" y2="6" />
+                                <line x1="8" y1="12" x2="21" y2="12" />
+                                <line x1="8" y1="18" x2="21" y2="18" />
+                                <line x1="3" y1="6" x2="3.01" y2="6" />
+                                <line x1="3" y1="12" x2="3.01" y2="12" />
+                                <line x1="3" y1="18" x2="3.01" y2="18" />
+                            </svg>
+                            Recent Videos
+                        </h3>
+                        <div class="playlist-actions">
+                            <button
+                                id="exportBtn"
+                                class="btn-sm btn-ghost"
+                                title="Save playlist to a JSON file"
+                            >
+                                💾 Save
                             </button>
-                            <input type="range" id="metroVolSlider" class="volume-slider" min="0" max="100" step="1" value="50" title="Metronome volume">
-                            <span id="metroVolLabel" class="volume-label">50</span>
+                            <button
+                                id="importBtn"
+                                class="btn-sm btn-ghost"
+                                title="Load playlist from a .json file"
+                            >
+                                📂 Load
+                            </button>
                         </div>
-                        <div class="metro-beat-dots" id="metroBeatDots">
-                            <span class="metro-dot"></span>
-                            <span class="metro-dot"></span>
-                            <span class="metro-dot"></span>
-                            <span class="metro-dot"></span>
-                        </div>
-
-                        <div class="prog-tempo">
-                            <div class="prog-tempo-header">
-                                <div class="control-title">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
-                                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
-                                        <polyline points="17 6 23 6 23 12"/>
-                                    </svg>
-                                    <h3>Progressive Tempo</h3>
-                                </div>
-                                <label class="toggle" title="Enable progressive tempo ramp">
-                                    <input type="checkbox" id="progToggle">
-                                    <span class="toggle-track"><span class="toggle-thumb"></span></span>
-                                </label>
-                            </div>
-                            <div class="prog-tempo-body" id="progBody">
-                                <div class="prog-row prog-bpm-row">
-                                    <div class="prog-bpm-group">
-                                        <span class="prog-bpm-tag">START</span>
-                                        <button class="prog-adj" data-target="progStartBpm" data-dir="-1">−</button>
-                                        <span id="progStartBpm" class="prog-bpm-val" data-value="85">85</span>
-                                        <button class="prog-adj" data-target="progStartBpm" data-dir="1">+</button>
-                                    </div>
-                                    <svg class="prog-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="20" height="20">
-                                        <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
-                                    </svg>
-                                    <div class="prog-bpm-group">
-                                        <span class="prog-bpm-tag">END</span>
-                                        <button class="prog-adj" data-target="progEndBpm" data-dir="-1">−</button>
-                                        <span id="progEndBpm" class="prog-bpm-val" data-value="110">110</span>
-                                        <button class="prog-adj" data-target="progEndBpm" data-dir="1">+</button>
-                                    </div>
-                                </div>
-                                <div class="prog-row">
-                                    <label class="prog-label">Step</label>
-                                    <select id="progStep" class="prog-select">
-                                        <option value="1">1 BPM</option>
-                                        <option value="2">2 BPM</option>
-                                        <option value="3">3 BPM</option>
-                                        <option value="5" selected>5 BPM</option>
-                                        <option value="10">10 BPM</option>
-                                    </select>
-                                    <label class="prog-label">Bars</label>
-                                    <select id="progBars" class="prog-select">
-                                        <option value="2">2</option>
-                                        <option value="4" selected>4</option>
-                                        <option value="8">8</option>
-                                        <option value="16">16</option>
-                                    </select>
-                                </div>
-                                <div class="prog-progress-row" id="progProgressRow" style="display:none">
-                                    <div class="prog-progress-bar">
-                                        <div class="prog-progress-fill" id="progFill"></div>
-                                    </div>
-                                    <span class="prog-progress-text" id="progText">85 → 110</span>
-                                </div>
-                            </div>
+                        <input type="file" id="importFile" accept=".json" style="display: none" />
+                    </div>
+                    <div class="playlist-list" id="playlistContainer">
+                        <div class="playlist-empty">
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                width="40"
+                                height="40"
+                            >
+                                <path d="M9 18V5l12-2v13" />
+                                <circle cx="6" cy="18" r="3" />
+                                <circle cx="18" cy="16" r="3" />
+                            </svg>
+                            <p>No videos yet</p>
+                            <span>Load a video to get started</span>
                         </div>
                     </div>
-                </div>
+                </aside>
+            </main>
+        </div>
 
-            </section>
+        <div class="toast-container" id="toastContainer" aria-live="polite"></div>
 
-            <aside class="playlist-section">
-                <div class="playlist-header">
-                    <h3>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
-                            <line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/>
-                            <line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/>
-                            <line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>
-                        </svg>
-                        Recent Videos
-                    </h3>
-                    <div class="playlist-actions">
-                        <button id="exportBtn" class="btn-sm btn-ghost" title="Save playlist to a JSON file">💾 Save</button>
-                        <button id="importBtn" class="btn-sm btn-ghost" title="Load playlist from a .json file">📂 Load</button>
-                    </div>
-                    <input type="file" id="importFile" accept=".json" style="display:none">
-                </div>
-                <div class="playlist-list" id="playlistContainer">
-                    <div class="playlist-empty">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="40" height="40">
-                            <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
-                        </svg>
-                        <p>No videos yet</p>
-                        <span>Load a video to get started</span>
-                    </div>
-                </div>
-            </aside>
-        </main>
-    </div>
-
-    <div class="toast-container" id="toastContainer" aria-live="polite"></div>
-
-    <script type="module" src="js/app.js"></script>
-</body>
+        <script type="module" src="js/app.js"></script>
+    </body>
 </html>

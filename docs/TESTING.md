@@ -77,7 +77,7 @@ E2E tests launch a **real Chromium browser**, open the app, and interact with it
 | **Loop Region** | Loop toggle checked by default, A/B/restart/reset buttons visible, time displays show 0:00 |
 | **Speed Control** | Badge shows 1.00x, slider defaults to 1, clicking a preset updates the badge, moving slider updates badge |
 | **Metronome** | BPM shows 120, +/- buttons increment/decrement, 4 beat dots visible, progressive tempo toggle works |
-| **Playlist Sidebar** | Auto-loads videos from `playlist.json`, items show titles, export/import buttons visible |
+| **Playlist Sidebar** | Auto-loads videos from `data/playlist.json`, items show titles, export/import buttons visible |
 | **Keyboard Shortcuts** | Space key works, T key toggles metronome with toast, shortcuts are ignored when typing in the URL input |
 | **Responsive Layout** | Keyboard hints hidden on narrow viewport (800px), visible on wide viewport (1200px) |
 
@@ -87,7 +87,7 @@ E2E tests launch a **real Chromium browser**, open the app, and interact with it
 npm run test:e2e
 ```
 
-Playwright serves the app on **port 3001** (configured in `playwright.config.js`), separate from the default **port 3000** used by `start.bat` and `npm start`, so you can keep a development server running without port conflicts.
+Playwright serves the app on **port 3001** (configured in `playwright.config.js`), separate from the default **port 3000** used by `scripts/start.bat` and `npm start`, so you can keep a development server running without port conflicts.
 
 Expected output:
 

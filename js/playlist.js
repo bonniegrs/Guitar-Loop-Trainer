@@ -206,7 +206,7 @@ export function importPlaylist(file, onComplete) {
 }
 
 /**
- * On first visit (empty localStorage), try to seed the playlist from playlist.json.
+ * On first visit (empty localStorage), try to seed the playlist from data/playlist.json.
  * @param {Function} [onComplete] - Called after successful auto-load
  */
 export async function autoLoadFromFile(onComplete) {
@@ -214,7 +214,7 @@ export async function autoLoadFromFile(onComplete) {
     if (existing.length > 0) return;
 
     try {
-        const res = await fetch('playlist.json');
+        const res = await fetch('data/playlist.json');
         if (!res.ok) return;
         const data = await res.json();
         if (!Array.isArray(data) || data.length === 0) return;

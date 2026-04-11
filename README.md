@@ -57,7 +57,7 @@
 - Drag-and-drop reordering
 - **Export** your playlist to a JSON file
 - **Import** a playlist from JSON
-- Auto-loads a bundled `playlist.json` on first visit (if no saved data exists)
+- Auto-loads a bundled `data/playlist.json` on first visit (if no saved data exists)
 - Stores up to 50 entries in `localStorage`
 
 ### Keyboard Shortcuts
@@ -89,7 +89,7 @@
 
 **Option 1 — Windows quick start:**
 
-Double-click `start.bat`. It launches a local server on port 3000 and opens the app in your default browser.
+Double-click `scripts/start.bat`. It launches a local server on port 3000 and opens the app in your default browser.
 
 **Option 2 — Any static server:**
 
@@ -117,34 +117,38 @@ Install the [Live Server](https://marketplace.visualstudio.com/items?itemName=ri
 
 ```
 Guitar-Loop-Trainer/
-├── index.html           # Single-page app shell
-├── styles.css           # Full theme and layout
+├── index.html            # Single-page app shell
+├── styles.css            # Full theme and layout
+├── favicon.svg           # Guitar-pick tab icon
 ├── js/
-│   ├── app.js           # Entry point — imports modules, wires events, init
-│   ├── config.js        # Application-wide constants
-│   ├── state.js         # Shared mutable state
-│   ├── dom.js           # Cached DOM element references
-│   ├── utils.js         # Pure helpers (formatTime, escapeHtml)
-│   ├── toast.js         # Toast notification system
-│   ├── storage.js       # localStorage persistence layer
-│   ├── player.js        # Video player lifecycle and transport
-│   ├── loop.js          # A/B loop region and timeline
-│   ├── speed.js         # Playback speed control
-│   ├── metronome.js     # Web Audio metronome + progressive tempo
-│   ├── playlist.js      # Playlist UI, drag-and-drop, import/export
-│   └── shortcuts.js     # Keyboard shortcut handler
-├── playlist.json        # Sample playlist (auto-loaded on first visit)
-├── screenshots/         # README screenshots
-├── favicon.svg          # Guitar-pick tab icon
-├── start.bat            # Windows launcher script
-├── tests/               # Unit tests (Vitest)
-├── e2e/                 # End-to-end tests (Playwright)
-├── package.json         # Dev dependencies and scripts
-├── vitest.config.js     # Unit test configuration
-├── playwright.config.js # E2E test configuration
-├── .editorconfig        # Editor formatting rules
+│   ├── app.js            # Entry point — imports modules, wires events, init
+│   ├── config.js         # Application-wide constants
+│   ├── state.js          # Shared mutable state
+│   ├── dom.js            # Cached DOM element references
+│   ├── utils.js          # Pure helpers (formatTime, escapeHtml)
+│   ├── toast.js          # Toast notification system
+│   ├── storage.js        # localStorage persistence layer
+│   ├── player.js         # Video player lifecycle and transport
+│   ├── loop.js           # A/B loop region and timeline
+│   ├── speed.js          # Playback speed control
+│   ├── metronome.js      # Web Audio metronome + progressive tempo
+│   ├── playlist.js       # Playlist UI, drag-and-drop, import/export
+│   └── shortcuts.js      # Keyboard shortcut handler
+├── data/
+│   └── playlist.json     # Sample playlist (auto-loaded on first visit)
+├── scripts/
+│   └── start.bat         # Windows launcher script
+├── docs/
+│   └── TESTING.md        # Testing guide (unit + E2E)
+├── tests/                # Unit tests (Vitest)
+├── e2e/                  # End-to-end tests (Playwright)
+├── screenshots/          # README screenshots
+├── package.json          # Dev dependencies and scripts
+├── vitest.config.js      # Unit test configuration
+├── playwright.config.js  # E2E test configuration
+├── .editorconfig         # Editor formatting rules
 ├── .gitignore
-├── LICENSE              # MIT License
+├── LICENSE               # MIT License
 └── README.md
 ```
 
@@ -192,7 +196,7 @@ npm run test:e2e
 npm run test:all
 ```
 
-For the full testing guide (debugging, watch mode, adding new tests), see [TESTING.md](TESTING.md).
+For the full testing guide (debugging, watch mode, adding new tests), see [TESTING.md](docs/TESTING.md).
 
 ---
 

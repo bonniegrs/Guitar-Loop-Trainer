@@ -1,5 +1,5 @@
 @echo off
-cd /d "%~dp0"
+cd /d "%~dp0.."
 title Guitar Loop Trainer
 echo ============================================
 echo   Guitar Loop Trainer - Starting...
